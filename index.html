@@ -331,6 +331,7 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
     <li><a href="#resultados">Resultados</a></li>
     <li><a href="#evolucao">Evolução</a></li>
     <li><a href="#caminhos">Caminhos</a></li>
+    <li><a href="#video" style="color:var(--verde);font-weight:700">▶ Vídeo</a></li>
     <li><a href="https://github.com/liaa-aparecido/firewall-ia" target="_blank" class="nav-gh">GitHub ↗</a></li>
   </ul>
 </nav>
@@ -1185,6 +1186,79 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 
 </section>
 
+
+<!-- ══ VÍDEO ══ -->
+<section id="video" class="fade-in">
+  <div class="sec-tag">09 · Vídeo do projeto</div>
+  <h2>O Faro em 60 segundos</h2>
+  <p class="sec-desc">
+    Como o pipeline correlaciona 48.915 alertas do Suricata, identifica o risco real e propõe
+    regras de bloqueio no OPNsense via API — sem LLM escrevendo direto no firewall.
+  </p>
+
+  <div style="
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    max-width:900px;
+    margin:0 auto;
+    box-shadow:0 8px 40px rgba(0,0,0,.5);
+  ">
+    <!-- Barra de topo decorativa -->
+    <div style="height:4px;background:linear-gradient(90deg,var(--azul),var(--verde),var(--rosa))"></div>
+
+    <!-- Player de vídeo -->
+    <video
+      id="faro-video"
+      controls
+      preload="metadata"
+      poster=""
+      style="width:100%;display:block;background:#030b17;"
+    >
+      <source src="assets/faro_video.mp4" type="video/mp4">
+      Seu navegador não suporta o elemento de vídeo.
+      <a href="assets/faro_video.mp4" style="color:var(--azul)">Baixar o vídeo</a>
+    </video>
+
+    <!-- Legenda inferior -->
+    <div style="padding:1rem 1.4rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line)">
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;flex:1">
+        <span style="font-size:.82rem;color:var(--cz)">⏱ ~61 segundos</span>
+        <span style="font-size:.82rem;color:var(--cz)">🎬 9 cenas</span>
+        <span style="font-size:.82rem;color:var(--cz)">📐 1280×720 · H.264</span>
+      </div>
+      <a href="assets/faro_video.mp4" download
+         style="
+           background:var(--azul2);color:#fff;
+           padding:.4rem 1rem;border-radius:7px;
+           font-size:.82rem;font-weight:700;text-decoration:none;
+           transition:background .2s;
+         "
+         onmouseover="this.style.background='#4f91ff'"
+         onmouseout="this.style.background='#2563eb'"
+      >⬇ Baixar MP4</a>
+    </div>
+  </div>
+
+  <!-- Sumário das cenas -->
+  <div class="grid-3" style="margin-top:1.8rem;max-width:900px;margin-left:auto;margin-right:auto">
+    <div class="card" style="padding:1rem">
+      <div style="font-size:.75rem;color:var(--azul);font-weight:700;margin-bottom:.3rem">CENAS 0–1</div>
+      <p style="font-size:.88rem">Título e cenário: OPNsense, Suricata, 48.915 alertas e 31 dias de coleta real</p>
+    </div>
+    <div class="card" style="padding:1rem">
+      <div style="font-size:.75rem;color:var(--amar);font-weight:700;margin-bottom:.3rem">CENAS 2–3</div>
+      <p style="font-size:.88rem">O problema do volume vs. risco real · Community ID unindo os dois sistemas</p>
+    </div>
+    <div class="card" style="padding:1rem">
+      <div style="font-size:.75rem;color:var(--verde);font-weight:700;margin-bottom:.3rem">CENAS 4–8</div>
+      <p style="font-size:.88rem">As 3 trilhas · Split temporal · CVE-2021-35394 Realtek bloqueado · 0% falso positivo</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
 
 <!-- ══ ENTREGÁVEIS ══ -->
 <section class="fade-in">
