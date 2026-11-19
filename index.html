@@ -329,6 +329,7 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
     <li><a href="#solucao">Solução</a></li>
     <li><a href="#arquitetura">C4</a></li>
     <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#detalhamento">Componentes</a></li>
     <li><a href="#evolucao">Evolução</a></li>
     <li><a href="#caminhos">Caminhos</a></li>
     <li><a href="#video" style="color:var(--verde);font-weight:700">▶ Vídeo</a></li>
@@ -565,12 +566,12 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
       <span style="background:rgba(79,145,255,.12);color:var(--azul);padding:.2rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700">C4 Level 1</span>
     </div>
     <p style="font-size:.9rem;margin-bottom:1rem">
-      O Faro fica ao lado do firewall: lê o que o OPNsense registra e devolve regras pela API, 
-      consultando fontes de reputação e um modelo de IA.
+      Vista abstrata: o Faro como uma caixa só, quem o usa (Analista de TI) e com quais sistemas ele conversa
+      — OPNsense, fontes de reputação, modelo de IA e CrowdSec.
     </p>
     <div style="background:#030b17;border-radius:10px;padding:.5rem;overflow-x:auto">
-      <img src="assets/c4_nivel1.svg" alt="C4 Nível 1 — Contexto do sistema Faro" 
-           style="width:100%;max-width:900px;display:block;margin:0 auto"/>
+      <img src="assets/c4_nivel1.svg" alt="C4 Nível 1 — Contexto do sistema Faro"
+           style="width:100%;max-width:1000px;display:block;margin:0 auto"/>
     </div>
   </div>
 
@@ -582,18 +583,17 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
       <span style="background:rgba(34,214,122,.12);color:var(--verde);padding:.2rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700">C4 Level 2</span>
     </div>
     <p style="font-size:.9rem;margin-bottom:1rem">
-      O pacote chega uma vez pela igb0: o Suricata recebe uma cópia e o PF processa o original. 
-      A correlação pelo Community ID gera o CSV que alimenta o filtro, a IA, a proposta de regra e o dashboard.
+      Vista de sistema e operação: abre o OPNsense e o Faro e mostra os processos, arquivos e scripts
+      por onde o dado passa — do pacote na igb0 até a regra aplicada via API REST.
     </p>
     <div style="background:#030b17;border-radius:10px;padding:.5rem;overflow-x:auto">
       <img src="assets/c4_nivel2.svg" alt="C4 Nível 2 — Contêineres do Faro e do OPNsense"
-           style="width:100%;max-width:1100px;display:block;margin:0 auto"/>
+           style="width:100%;max-width:1160px;display:block;margin:0 auto"/>
     </div>
     <div style="margin-top:1rem;padding:.8rem;background:var(--card2);border-radius:8px;font-size:.85rem">
       <strong style="color:var(--amar)">Caixas tracejadas (amarelas):</strong>
-      <span style="color:var(--cinza)"> "Filtro em camadas" e "Seletor de candidatos IA" — são as especificações que o professor pediu. 
-      Estão documentadas em 
-      <code>docs/especificacao_ia.md</code> no repositório.</span>
+      "Filtro em camadas" e "Seletor de candidatos IA" — componentes que o professor pediu especificar.
+      Especificação completa em <code>docs/especificacao_ia.md</code> no repositório.
     </div>
   </div>
 </section>
@@ -708,6 +708,97 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 <hr class="divider">
 
 
+
+<hr class="divider">
+
+<!-- ══ DETALHAMENTO TÉCNICO ══ -->
+<section id="detalhamento" class="fade-in">
+  <div class="sec-tag">03b · Detalhamento técnico</div>
+  <h2>O que cada componente detecta</h2>
+  <p class="sec-desc">
+    Combinado em 10/11: separar o que é detectado só pelo firewall, só pelo Suricata,
+    pela interseção e o que a IA e o CrowdSec acrescentam.
+  </p>
+
+  <!-- Tabela de cobertura por componente -->
+  <div class="comp-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>O que detecta</th>
+          <th>Alertas / fluxos</th>
+          <th>Cobertura incremental</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--branco)">🔒 PF sozinho</strong><br><span style="font-size:.8rem;color:var(--cz)">default deny + blacklist</span></td>
+          <td>IPs em listas DROP/DShield · tráfego sem rota · CIDR hostil</td>
+          <td><strong style="color:var(--verde)">42.639</strong> sem registro<br>+ 165 bloqueio explícito</td>
+          <td class="td-ok">87,3% — base da defesa</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--branco)">📡 Suricata sozinho</strong><br><span style="font-size:.8rem;color:var(--cz)">IDS · wire/pcap · SIDs</span></td>
+          <td>Assinaturas de exploit · reputação ET CINS · comportamento DNS/STUN</td>
+          <td><strong style="color:var(--amar)">48.915</strong> alertas totais</td>
+          <td class="td-warn">Visibilidade — sem bloqueio</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--branco)">🔗 Interseção PF + Suricata</strong><br><span style="font-size:.8rem;color:var(--cz)">Community ID</span></td>
+          <td>Alertas com desfecho conhecido — bloqueado, passou ou sem registro</td>
+          <td><strong style="color:var(--azul)">6.012</strong> fluxos com desfecho <em>pass</em></td>
+          <td class="td-ok">Elimina falsos alarmes do IDS</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--branco)">🤖 IA (Faro)</strong><br><span style="font-size:.8rem;color:var(--cz)">família comportamental + assinaturas</span></td>
+          <td>CVE-2021-35394 Realtek SDK · porta UDP 9034 · padrão de taxa por IP</td>
+          <td><strong style="color:var(--verde)">8</strong> alertas de exploit real → <strong style="color:var(--verde)">5</strong> regras</td>
+          <td class="td-ok">0% FP · 100% cobertura Realtek</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--branco)">🛡 CrowdSec</strong><br><span style="font-size:.8rem;color:var(--cz)">blocklist colaborativa</span></td>
+          <td>IPs com histórico colaborativo em tempo real · 8.328 IPs ativos</td>
+          <td><strong style="color:var(--azul)">8.328</strong> IPs bloqueados</td>
+          <td class="td-ok">Concorda: 0% incremental sobre tráfego legítimo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quadro Venn simplificado em texto -->
+  <div class="grid-3" style="margin-top:2rem">
+    <div class="card" style="border-color:rgba(139,163,192,.3)">
+      <div class="card-accent" style="background:linear-gradient(90deg,var(--cz),#334155)"></div>
+      <span class="badge" style="background:rgba(139,163,192,.12);color:var(--cz)">Só PF bloqueia</span>
+      <h3>42.804 fluxos</h3>
+      <p>Tráfego que nem chega ao Suricata — bloqueado por regras de reputação, default deny ou DShield antes de qualquer análise.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <div class="card-accent" style="background:linear-gradient(90deg,var(--amar),#92400e)"></div>
+      <span class="badge" style="background:rgba(245,197,24,.12);color:var(--amar)">Suricata alerta, PF já tratou</span>
+      <h3>42.639 alertas</h3>
+      <p>Suricata disparou o alerta mas o PF já havia tratado — confirma que o IDS vê o pacote antes da decisão do PF.</p>
+    </div>
+    <div class="card" style="border-color:rgba(34,214,122,.3)">
+      <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#065f46)"></div>
+      <span class="badge" style="background:rgba(34,214,122,.12);color:var(--verde)">IA acrescenta</span>
+      <h3>5 regras novas</h3>
+      <p>Realtek CVE-2021-35394 — 8 alertas de exploit real que passaram pelas listas negras e foram capturados pela família comportamental da IA.</p>
+    </div>
+  </div>
+
+  <div class="resultado-box" style="margin-top:1.5rem">
+    <h3>🔍 Conclusão do detalhamento</h3>
+    <p>
+      O PF (87,3%) e o CrowdSec cobrem a maior parte do tráfego malicioso automaticamente.
+      O Suricata fornece visibilidade sobre o que o PF não registra.
+      A IA acrescenta <strong style="color:var(--branco)">uma camada comportamental</strong> que identificou
+      o único exploit real do período (CVE-2021-35394) sem gerar falso positivo em 336.049 fluxos benignos.
+      O CrowdSec e o pipeline chegam à mesma conclusão de forma independente.
+    </p>
+  </div>
+</section>
 
 <hr class="divider">
 

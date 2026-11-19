@@ -1,226 +1,260 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800">
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="820" viewBox="0 0 1160 820">
 <defs>
-  <marker id="a" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+  <marker id="arr" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
     <polygon points="0 0,9 3.5,0 7" fill="#4f91ff"/>
   </marker>
   <style>
-    text { font-family: 'Segoe UI', Arial, sans-serif; }
-    .titulo { font-size:17px; font-weight:700; fill:#4f91ff; }
-    .sub    { font-size:11px; fill:#8ba3c0; }
-    .label  { font-size:12px; font-weight:700; fill:#e8f0fe; }
-    .desc   { font-size:9px;  fill:#8ba3c0; }
-    .tipo   { font-size:8px;  fill:#8ba3c0; }
-    .seta   { font-size:9px;  fill:#8ba3c0; }
-    .cnt    { font-size:11px; fill:#8ba3c0; }
-    .leg    { font-size:11px; fill:#8ba3c0; }
+    text { font-family: Arial, sans-serif; }
   </style>
 </defs>
 
 <!-- Fundo -->
-<rect width="1100" height="800" fill="#07101c"/>
+<rect width="1160" height="820" fill="#07101c"/>
 
 <!-- Título -->
-<text x="550" y="32" text-anchor="middle" class="titulo">C4 Nível 2 — Contêineres do Faro e do OPNsense</text>
-<text x="550" y="50" text-anchor="middle" class="sub">O pacote chega uma vez pela igb0: Suricata recebe cópia, PF processa o original. Community ID une os dois.</text>
-<line x1="20" y1="60" x2="1080" y2="60" stroke="#1e3050" stroke-width="1"/>
+<text x="580" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#4f91ff">C4 Nível 2 — Contêineres do Faro e do OPNsense</text>
+<text x="580" y="48" text-anchor="middle" font-size="10" fill="#8ba3c0">O pacote chega uma vez pela igb0: Suricata recebe cópia, PF processa o original. Community ID une os dois sistemas.</text>
+<line x1="20" y1="58" x2="1140" y2="58" stroke="#1e3050" stroke-width="1"/>
 
-<!-- ═══════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      CONTAINER: OPNsense (esquerda)
-════════════════════════════════════════════ -->
-<rect x="20" y="75" width="390" height="430" rx="12" fill="none" stroke="#8ba3c0" stroke-width="1.5" stroke-dasharray="8,5"/>
-<text x="215" y="97" text-anchor="middle" class="cnt">OPNsense [firewall existente]</text>
+══════════════════════════════════════════ -->
+<rect x="18" y="72" width="420" height="470" rx="12" fill="none" stroke="#8ba3c0" stroke-width="1.5" stroke-dasharray="8,5"/>
+<text x="228" y="90" text-anchor="middle" font-size="12" fill="#8ba3c0">OPNsense  [firewall existente]</text>
 
 <!-- igb0 WAN -->
-<rect x="40"  y="108" width="150" height="72" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="115" y="122" text-anchor="middle" class="tipo">[Interface de rede]</text>
-<text x="115" y="148" text-anchor="middle" class="label">igb0 WAN</text>
-<text x="115" y="165" text-anchor="middle" class="desc">o pacote chega 1 vez</text>
+<rect x="36"  y="102" width="168" height="76" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="120" y="118" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Interface de rede]</text>
+<text x="120" y="142" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">igb0 WAN</text>
+<text x="120" y="158" text-anchor="middle" font-size="9"  fill="#8ba3c0">o pacote chega 1 vez</text>
+<text x="120" y="170" text-anchor="middle" font-size="9"  fill="#8ba3c0">cópia → Suricata  original → PF</text>
 
 <!-- Suricata IDS -->
-<rect x="40"  y="210" width="150" height="80" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="115" y="224" text-anchor="middle" class="tipo">[Processo]</text>
-<text x="115" y="248" text-anchor="middle" class="label">Suricata IDS</text>
-<text x="115" y="265" text-anchor="middle" class="desc">recebe cópia, detecta</text>
-<text x="115" y="278" text-anchor="middle" class="desc">e não bloqueia</text>
+<rect x="36"  y="208" width="168" height="82" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="120" y="224" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Processo]</text>
+<text x="120" y="248" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Suricata 8.0.8 IDS</text>
+<text x="120" y="264" text-anchor="middle" font-size="9"  fill="#8ba3c0">recebe cópia via wire/pcap</text>
+<text x="120" y="278" text-anchor="middle" font-size="9"  fill="#8ba3c0">detecta, não bloqueia</text>
 
 <!-- eve.json -->
-<rect x="220" y="210" width="150" height="80" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="295" y="224" text-anchor="middle" class="tipo">[Arquivo JSON]</text>
-<text x="295" y="248" text-anchor="middle" class="label">eve.json</text>
-<text x="295" y="265" text-anchor="middle" class="desc">48.915 alertas</text>
-<text x="295" y="278" text-anchor="middle" class="desc">community_id ativo</text>
+<rect x="234" y="208" width="168" height="82" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="318" y="224" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Arquivo JSON]</text>
+<text x="318" y="248" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">eve.json</text>
+<text x="318" y="264" text-anchor="middle" font-size="9"  fill="#8ba3c0">48.915 alertas · 7 dias</text>
+<text x="318" y="278" text-anchor="middle" font-size="9"  fill="#8ba3c0">community_id ativo</text>
 
 <!-- PF Packet Filter -->
-<rect x="40"  y="325" width="150" height="80" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="115" y="339" text-anchor="middle" class="tipo">[Processo]</text>
-<text x="115" y="363" text-anchor="middle" class="label">PF Packet Filter</text>
-<text x="115" y="380" text-anchor="middle" class="desc">pass 66.958/dia</text>
-<text x="115" y="393" text-anchor="middle" class="desc">block 30.153/dia</text>
+<rect x="36"  y="324" width="168" height="82" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="120" y="340" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Processo]</text>
+<text x="120" y="364" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">PF Packet Filter</text>
+<text x="120" y="380" text-anchor="middle" font-size="9"  fill="#8ba3c0">pass 66.958 / dia</text>
+<text x="120" y="394" text-anchor="middle" font-size="9"  fill="#8ba3c0">block 30.153 / dia</text>
 
 <!-- filterlog -->
-<rect x="220" y="325" width="150" height="80" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="295" y="339" text-anchor="middle" class="tipo">[Arquivo syslog]</text>
-<text x="295" y="363" text-anchor="middle" class="label">filterlog</text>
-<text x="295" y="380" text-anchor="middle" class="desc">473.304 linhas</text>
-<text x="295" y="393" text-anchor="middle" class="desc">5 arquivos diários</text>
+<rect x="234" y="324" width="168" height="82" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="318" y="340" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Arquivo syslog · 5 arquivos]</text>
+<text x="318" y="364" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">filterlog</text>
+<text x="318" y="380" text-anchor="middle" font-size="9"  fill="#8ba3c0">473.304 linhas · 31 dias</text>
+<text x="318" y="394" text-anchor="middle" font-size="9"  fill="#8ba3c0">pass / block / default-deny</text>
 
 <!-- API REST -->
-<rect x="220" y="435" width="150" height="60" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="295" y="449" text-anchor="middle" class="tipo">[HTTPS]</text>
-<text x="295" y="473" text-anchor="middle" class="label">API REST</text>
-<text x="295" y="487" text-anchor="middle" class="desc">addRule e apply</text>
+<rect x="234" y="440" width="168" height="68" rx="6" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="318" y="456" text-anchor="middle" font-size="8"  fill="#8ba3c0">[HTTPS]</text>
+<text x="318" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">API REST</text>
+<text x="318" y="496" text-anchor="middle" font-size="9"  fill="#8ba3c0">addRule · apply · getRule</text>
 
-<!-- ═══════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      CONTAINER: Faro (direita)
-════════════════════════════════════════════ -->
-<rect x="440" y="75" width="560" height="430" rx="12" fill="none" stroke="#22d67a" stroke-width="1.5" stroke-dasharray="8,5"/>
-<text x="720" y="97" text-anchor="middle" class="cnt" style="fill:#22d67a">Faro [sistema em foco — Python]</text>
+══════════════════════════════════════════ -->
+<rect x="460" y="72" width="680" height="470" rx="12" fill="none" stroke="#22d67a" stroke-width="1.5" stroke-dasharray="8,5"/>
+<text x="800" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#22d67a">Faro  [sistema em foco — Python 3.12 · VM Debian]</text>
 
 <!-- correlacionar_v2.py -->
-<rect x="460" y="108" width="200" height="90" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
-<text x="560" y="122" text-anchor="middle" class="tipo">[Script Python]</text>
-<text x="560" y="148" text-anchor="middle" class="label">correlacionar_v2.py</text>
-<text x="560" y="164" text-anchor="middle" class="desc">une EVE e filterlog</text>
-<text x="560" y="176" text-anchor="middle" class="desc">pelo Community ID</text>
-<text x="560" y="188" text-anchor="middle" class="desc">bloq:165 / pass:6.012 / s.r:42.639</text>
+<rect x="478" y="102" width="210" height="96" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
+<text x="583" y="118" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Script Python]</text>
+<text x="583" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">correlacionar_v2.py</text>
+<text x="583" y="156" text-anchor="middle" font-size="9"  fill="#8ba3c0">une EVE e filterlog</text>
+<text x="583" y="170" text-anchor="middle" font-size="9"  fill="#8ba3c0">pelo Community ID</text>
+<text x="583" y="184" text-anchor="middle" font-size="9"  fill="#8ba3c0">bloq:165 · pass:6.012 · s.r:42.639</text>
 
 <!-- CSV de correlação -->
-<rect x="460" y="228" width="200" height="72" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
-<text x="560" y="242" text-anchor="middle" class="tipo">[Arquivo CSV]</text>
-<text x="560" y="268" text-anchor="middle" class="label">CSV de correlação</text>
-<text x="560" y="284" text-anchor="middle" class="desc">IP, alertas, ação do PF</text>
+<rect x="478" y="230" width="210" height="76" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
+<text x="583" y="246" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Arquivo CSV]</text>
+<text x="583" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">CSV de correlação</text>
+<text x="583" y="286" text-anchor="middle" font-size="9"  fill="#8ba3c0">IP, alertas, ação do PF</text>
+<text x="583" y="300" text-anchor="middle" font-size="9"  fill="#8ba3c0">community_id · desfecho</text>
 
 <!-- dashboard.py -->
-<rect x="460" y="328" width="200" height="80" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
-<text x="560" y="342" text-anchor="middle" class="tipo">[Aplicação web Flask]</text>
-<text x="560" y="366" text-anchor="middle" class="label">dashboard.py :8080</text>
-<text x="560" y="382" text-anchor="middle" class="desc">funil ao vivo, regras ativas</text>
-<text x="560" y="395" text-anchor="middle" class="desc">atualiza a cada 15s via SSE</text>
+<rect x="478" y="336" width="210" height="90" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
+<text x="583" y="352" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Aplicação web Flask]</text>
+<text x="583" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">dashboard.py  :8080</text>
+<text x="583" y="390" text-anchor="middle" font-size="9"  fill="#8ba3c0">funil ao vivo · regras ativas</text>
+<text x="583" y="404" text-anchor="middle" font-size="9"  fill="#8ba3c0">atualiza a cada 15 s via SSE</text>
+<text x="583" y="418" text-anchor="middle" font-size="9"  fill="#22d67a">pfctl -sr via SSH</text>
 
-<!-- Filtro em camadas (tracejado amarelo) -->
-<rect x="690" y="108" width="190" height="90" rx="6" fill="#1a1a0a" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="6,4"/>
-<text x="785" y="122" text-anchor="middle" class="tipo" style="fill:#f5c518">[A especificar]</text>
-<text x="785" y="148" text-anchor="middle" class="label" style="fill:#f5c518">Filtro em camadas</text>
-<text x="785" y="164" text-anchor="middle" class="desc">AbuseIPDB, Spamhaus DROP</text>
-<text x="785" y="176" text-anchor="middle" class="desc">e assinaturas Suricata</text>
-<text x="785" y="188" text-anchor="middle" class="desc">6.700 IPs → 56</text>
+<!-- Filtro em camadas (tracejado amarelo — a especificar) -->
+<rect x="716" y="102" width="204" height="96" rx="6" fill="#141400" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="818" y="118" text-anchor="middle" font-size="8"  fill="#f5c518">[Componente — a especificar]</text>
+<text x="818" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#f5c518">Filtro em camadas</text>
+<text x="818" y="156" text-anchor="middle" font-size="9"  fill="#8ba3c0">AbuseIPDB · Spamhaus DROP</text>
+<text x="818" y="170" text-anchor="middle" font-size="9"  fill="#8ba3c0">assinaturas Suricata</text>
+<text x="818" y="184" text-anchor="middle" font-size="9"  fill="#8ba3c0">6.700 IPs → 56 candidatos</text>
 
-<!-- Seletor de candidatos IA (tracejado amarelo) -->
-<rect x="690" y="228" width="190" height="80" rx="6" fill="#1a1a0a" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="6,4"/>
-<text x="785" y="242" text-anchor="middle" class="tipo" style="fill:#f5c518">[IA — a especificar]</text>
-<text x="785" y="268" text-anchor="middle" class="label" style="fill:#f5c518">Seletor de candidatos</text>
-<text x="785" y="284" text-anchor="middle" class="desc">escolhe IPs a bloquear</text>
-<text x="785" y="296" text-anchor="middle" class="desc">e justifica a decisão</text>
+<!-- Seletor de candidatos IA (tracejado amarelo — a especificar) -->
+<rect x="716" y="230" width="204" height="76" rx="6" fill="#141400" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="818" y="246" text-anchor="middle" font-size="8"  fill="#f5c518">[IA — a especificar]</text>
+<text x="818" y="268" text-anchor="middle" font-size="12" font-weight="bold" fill="#f5c518">Seletor de candidatos</text>
+<text x="818" y="284" text-anchor="middle" font-size="9"  fill="#8ba3c0">escolhe IPs a bloquear</text>
+<text x="818" y="298" text-anchor="middle" font-size="9"  fill="#8ba3c0">e justifica a decisão</text>
 
 <!-- propor_regra.py -->
-<rect x="690" y="338" width="190" height="80" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
-<text x="785" y="352" text-anchor="middle" class="tipo">[Script Python]</text>
-<text x="785" y="376" text-anchor="middle" class="label">propor_regra.py</text>
-<text x="785" y="392" text-anchor="middle" class="desc">dry-run por padrão</text>
-<text x="785" y="405" text-anchor="middle" class="desc">UUID rastreável</text>
+<rect x="716" y="336" width="204" height="90" rx="6" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
+<text x="818" y="352" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Script Python]</text>
+<text x="818" y="374" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">propor_regra.py</text>
+<text x="818" y="390" text-anchor="middle" font-size="9"  fill="#8ba3c0">dry-run por padrão</text>
+<text x="818" y="404" text-anchor="middle" font-size="9"  fill="#8ba3c0">UUID rastreável · 5 regras ativas</text>
+<text x="818" y="418" text-anchor="middle" font-size="9"  fill="#22d67a">POST addRule + apply  [API REST]</text>
 
-<!-- ═══════════════════════════════════════════
-     EXTERNOS (linha inferior)
-════════════════════════════════════════════ -->
-<rect x="20"  y="545" width="140" height="72" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="90"  y="559" text-anchor="middle" class="tipo">[Externo]</text>
-<text x="90"  y="583" text-anchor="middle" class="label">Internet</text>
-<text x="90"  y="599" text-anchor="middle" class="desc">varreduras, exploits</text>
+<!-- ══════════════════════════════════════════
+     EXTERNOS — linha inferior
+══════════════════════════════════════════ -->
+<rect x="18"  y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="92"  y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Externo]</text>
+<text x="92"  y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Internet</text>
+<text x="92"  y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">varreduras · exploits</text>
+<text x="92"  y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">scans · bots</text>
 
-<rect x="175" y="545" width="140" height="72" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="245" y="559" text-anchor="middle" class="tipo">[Fonte externa]</text>
-<text x="245" y="583" text-anchor="middle" class="label">Assinaturas ET</text>
-<text x="245" y="599" text-anchor="middle" class="desc">ataques conhecidos</text>
+<rect x="178" y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="252" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Fonte externa]</text>
+<text x="252" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Assinaturas ET</text>
+<text x="252" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">Emerging Threats</text>
+<text x="252" y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">ataques conhecidos</text>
 
-<rect x="330" y="545" width="140" height="72" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="400" y="559" text-anchor="middle" class="tipo">[API externa]</text>
-<text x="400" y="583" text-anchor="middle" class="label">AbuseIPDB</text>
-<text x="400" y="599" text-anchor="middle" class="desc">414.244 IPs</text>
+<rect x="338" y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="412" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[API externa]</text>
+<text x="412" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">AbuseIPDB</text>
+<text x="412" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">414.244 IPs · score 100</text>
+<text x="412" y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">180 dias de histórico</text>
 
-<rect x="485" y="545" width="140" height="72" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="555" y="559" text-anchor="middle" class="tipo">[Lista externa]</text>
-<text x="555" y="583" text-anchor="middle" class="label">Spamhaus DROP</text>
-<text x="555" y="599" text-anchor="middle" class="desc">1.767 CIDRs hostis</text>
+<rect x="498" y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="572" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Lista externa]</text>
+<text x="572" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Spamhaus DROP</text>
+<text x="572" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">1.767 CIDRs hostis</text>
+<text x="572" y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">blocos /8 a /24</text>
 
-<rect x="640" y="545" width="140" height="72" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="710" y="559" text-anchor="middle" class="tipo">[Externo]</text>
-<text x="710" y="583" text-anchor="middle" class="label">Modelo de IA</text>
-<text x="710" y="599" text-anchor="middle" class="desc">LLM online ou local</text>
+<rect x="658" y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="732" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[LLM online ou local]</text>
+<text x="732" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Modelo de IA</text>
+<text x="732" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">seleciona candidatos</text>
+<text x="732" y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">a bloqueio</text>
 
-<rect x="800" y="545" width="140" height="72" rx="6" fill="#0d1f3a" stroke="#4f91ff" stroke-width="1.5"/>
-<text x="870" y="559" text-anchor="middle" class="tipo">[Pessoa]</text>
-<text x="870" y="583" text-anchor="middle" class="label">Analista de TI</text>
-<text x="870" y="599" text-anchor="middle" class="desc">sem CLI, só navegador</text>
+<rect x="818" y="578" width="148" height="82" rx="6" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="892" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Serviço externo]</text>
+<text x="892" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">CrowdSec</text>
+<text x="892" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">8.328 IPs · blocklist</text>
+<text x="892" y="648" text-anchor="middle" font-size="9"  fill="#8ba3c0">colaborativa</text>
 
-<!-- ═══════════════════════════════════════════
-     SETAS OPNsense interno
-════════════════════════════════════════════ -->
-<line x1="115" y1="180" x2="115" y2="210" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="135" y="200" class="seta">cópia</text>
+<rect x="978" y="578" width="162" height="82" rx="6" fill="#0d1f3a" stroke="#4f91ff" stroke-width="1.5"/>
+<text x="1059" y="594" text-anchor="middle" font-size="8"  fill="#8ba3c0">[Pessoa]</text>
+<text x="1059" y="618" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8f0fe">Analista de TI</text>
+<text x="1059" y="634" text-anchor="middle" font-size="9"  fill="#8ba3c0">sem CLI · só navegador</text>
+<text x="1059" y="648" text-anchor="middle" font-size="9"  fill="#4f91ff">http://172.16.0.139:8080</text>
 
-<line x1="115" y1="290" x2="115" y2="325" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="135" y="313" class="seta">original</text>
+<!-- ══════════════════════════════════════════
+     SETAS INTERNAS — OPNsense
+══════════════════════════════════════════ -->
+<!-- igb0 → Suricata (cópia) -->
+<line x1="120" y1="178" x2="120" y2="208" stroke="#8ba3c0" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="140" y="198" font-size="9" fill="#8ba3c0">cópia</text>
 
-<line x1="190" y1="250" x2="220" y2="250" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="202" y="244" class="seta">gera</text>
+<!-- igb0 → PF (original) -->
+<line x1="140" y1="178" x2="150" y2="324" stroke="#8ba3c0" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"/>
+<text x="162" y="260" font-size="9" fill="#8ba3c0">original</text>
 
-<line x1="190" y1="365" x2="220" y2="365" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="202" y="358" class="seta">registra</text>
+<!-- Suricata → eve.json -->
+<line x1="204" y1="250" x2="234" y2="250" stroke="#8ba3c0" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="216" y="244" font-size="9" fill="#8ba3c0">gera</text>
 
-<!-- OPNsense → Faro -->
-<line x1="370" y1="250" x2="460" y2="175" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="408" y="202" text-anchor="middle" class="seta">lê eve.json</text>
+<!-- PF → filterlog -->
+<line x1="204" y1="368" x2="234" y2="368" stroke="#8ba3c0" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="213" y="362" font-size="9" fill="#8ba3c0">registra</text>
 
-<line x1="370" y1="365" x2="460" y2="264" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="408" y="308" text-anchor="middle" class="seta">lê filterlog</text>
+<!-- ══════════════════════════════════════════
+     SETAS OPNsense ↔ Faro
+══════════════════════════════════════════ -->
+<!-- eve.json → correlacionar_v2.py -->
+<line x1="402" y1="250" x2="478" y2="168" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="445" y="200" text-anchor="middle" font-size="9" fill="#8ba3c0">lê eve.json</text>
 
-<!-- Faro → API REST → PF -->
-<line x1="880" y1="418" x2="880" y2="465" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="880" y1="465" x2="295" y2="465" stroke="#4f91ff" stroke-width="1.5"/>
-<line x1="295" y1="465" x2="295" y2="435" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="590" y="458" text-anchor="middle" class="seta">POST addRule + apply [API REST]</text>
+<!-- filterlog → correlacionar_v2.py -->
+<line x1="402" y1="368" x2="478" y2="270" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="438" y="314" text-anchor="middle" font-size="9" fill="#8ba3c0">lê filterlog</text>
 
-<!-- Faro interno -->
-<line x1="660" y1="153" x2="690" y2="153" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="660" y1="264" x2="690" y2="268" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="785" y1="308" x2="785" y2="338" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="785" y1="198" x2="785" y2="228" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
+<!-- propor_regra → API REST (volta ao PF) -->
+<line x1="818" y1="426" x2="818" y2="490" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="818" y1="490" x2="318" y2="490" stroke="#4f91ff" stroke-width="1.5"/>
+<line x1="318" y1="490" x2="318" y2="440" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="580" y="484" text-anchor="middle" font-size="9" fill="#8ba3c0">POST addRule + apply  [API REST]</text>
 
-<!-- CSV → Filtro -->
-<line x1="560" y1="228" x2="560" y2="208" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
+<!-- ══════════════════════════════════════════
+     SETAS INTERNAS — Faro
+══════════════════════════════════════════ -->
+<!-- correlacionar → CSV -->
+<line x1="583" y1="198" x2="583" y2="230" stroke="#22d67a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<!-- Externos → sistema -->
-<line x1="90"  y1="545" x2="80"  y2="505" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
-<text x="45" y="522" class="seta">tráfego</text>
+<!-- CSV → Filtro em camadas -->
+<line x1="688" y1="268" x2="716" y2="168" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="720" y="218" font-size="9" fill="#8ba3c0">56 IPs</text>
 
-<line x1="245" y1="545" x2="190" y2="430" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
-<text x="202" y="488" text-anchor="middle" class="seta">atualizam</text>
+<!-- CSV → dashboard -->
+<line x1="583" y1="306" x2="583" y2="336" stroke="#22d67a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<line x1="400" y1="545" x2="690" y2="188" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
-<text x="540" y="420" text-anchor="middle" class="seta">lista</text>
+<!-- Filtro → Seletor IA -->
+<line x1="818" y1="198" x2="818" y2="230" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+<text x="840" y="218" font-size="9" fill="#f5c518">candidatos</text>
 
-<line x1="555" y1="545" x2="710" y2="308" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
-<text x="618" y="438" text-anchor="middle" class="seta">prompt</text>
+<!-- Seletor IA → propor_regra -->
+<line x1="818" y1="306" x2="818" y2="336" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
 
-<line x1="870" y1="545" x2="660" y2="408" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
-<text x="790" y="478" text-anchor="middle" class="seta">acompanha e valida [HTTP :8080]</text>
+<!-- ══════════════════════════════════════════
+     SETAS EXTERNOS → sistema
+══════════════════════════════════════════ -->
+<line x1="92"  y1="578" x2="80"  y2="542" stroke="#4a5568" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="45"   y="558" font-size="9" fill="#8ba3c0">tráfego</text>
 
-<!-- ═══════════════════════════════════════════
+<line x1="252" y1="578" x2="200" y2="440" stroke="#4a5568" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="216"  y="510" text-anchor="middle" font-size="9" fill="#8ba3c0">atualizam</text>
+
+<line x1="412" y1="578" x2="740" y2="198" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="590"  y="460" text-anchor="middle" font-size="9" fill="#8ba3c0">lista</text>
+
+<line x1="572" y1="578" x2="750" y2="306" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="664"  y="460" text-anchor="middle" font-size="9" fill="#8ba3c0">prompt</text>
+
+<line x1="732" y1="578" x2="740" y2="306" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+
+<line x1="892" y1="578" x2="750" y2="198" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="830"  y="460" text-anchor="middle" font-size="9" fill="#8ba3c0">blocklist</text>
+
+<line x1="1059" y1="578" x2="688" y2="426" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+<text x="900"  y="510" text-anchor="middle" font-size="9" fill="#8ba3c0">acompanha e valida [HTTP :8080]</text>
+
+<!-- ══════════════════════════════════════════
      LEGENDA
-════════════════════════════════════════════ -->
-<line x1="20" y1="667" x2="1080" y2="667" stroke="#1e3050" stroke-width="1"/>
-<rect x="20"  y="675" width="12" height="12" rx="2" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
-<text x="37" y="686" class="leg">Contêiner do Faro</text>
-<rect x="185" y="675" width="12" height="12" rx="2" fill="#1a1a0a" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="4,3"/>
-<text x="202" y="686" class="leg">A especificar</text>
-<rect x="310" y="675" width="12" height="12" rx="2" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
-<text x="327" y="686" class="leg">OPNsense (existente)</text>
-<rect x="490" y="675" width="12" height="12" rx="2" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
-<text x="507" y="686" class="leg">Externo</text>
-<rect x="590" y="675" width="12" height="12" rx="2" fill="#0d1f3a" stroke="#4f91ff" stroke-width="1.5"/>
-<text x="607" y="686" class="leg">Pessoa</text>
-<line x1="680" y1="681" x2="710" y2="681" stroke="#4f91ff" stroke-width="1.5"/>
-<text x="715" y="686" class="leg">relação síncrona</text>
-<line x1="840" y1="681" x2="870" y2="681" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="5,4"/>
-<text x="875" y="686" class="leg">relação assíncrona</text>
+══════════════════════════════════════════ -->
+<line x1="20" y1="698" x2="1140" y2="698" stroke="#1e3050" stroke-width="1"/>
+<rect x="20"  y="707" width="12" height="12" rx="2" fill="#0d2a1a" stroke="#22d67a" stroke-width="1.5"/>
+<text x="37"  y="718" font-size="11" fill="#8ba3c0">Contêiner do Faro</text>
+<rect x="185" y="707" width="12" height="12" rx="2" fill="#141400" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="202" y="718" font-size="11" fill="#8ba3c0">A especificar</text>
+<rect x="315" y="707" width="12" height="12" rx="2" fill="#0d1f30" stroke="#8ba3c0" stroke-width="1.5"/>
+<text x="332" y="718" font-size="11" fill="#8ba3c0">OPNsense (existente)</text>
+<rect x="500" y="707" width="12" height="12" rx="2" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="517" y="718" font-size="11" fill="#8ba3c0">Externo</text>
+<rect x="600" y="707" width="12" height="12" rx="2" fill="#0d1f3a" stroke="#4f91ff" stroke-width="1.5"/>
+<text x="617" y="718" font-size="11" fill="#8ba3c0">Pessoa</text>
+<line x1="700" y1="713" x2="730" y2="713" stroke="#4f91ff" stroke-width="1.5"/>
+<text x="735" y="718" font-size="11" fill="#8ba3c0">relação síncrona</text>
+<line x1="880" y1="713" x2="910" y2="713" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="915" y="718" font-size="11" fill="#8ba3c0">relação assíncrona</text>
 </svg>

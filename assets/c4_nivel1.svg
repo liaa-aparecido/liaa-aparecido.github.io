@@ -1,143 +1,152 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660">
 <defs>
-  <marker id="a" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+  <marker id="arr" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
     <polygon points="0 0,9 3.5,0 7" fill="#4f91ff"/>
   </marker>
   <style>
-    text { font-family: 'Segoe UI', Arial, sans-serif; }
-    .titulo { font-size:18px; font-weight:700; fill:#4f91ff; }
-    .sub    { font-size:11px; fill:#8ba3c0; }
-    .label  { font-size:13px; font-weight:700; fill:#e8f0fe; }
-    .desc   { font-size:10px; fill:#8ba3c0; }
-    .tipo   { font-size:9px;  fill:#8ba3c0; }
-    .seta   { font-size:9px;  fill:#8ba3c0; }
-    .leg    { font-size:11px; fill:#8ba3c0; }
+    text { font-family: Arial, sans-serif; }
   </style>
 </defs>
 
 <!-- Fundo -->
-<rect width="960" height="620" fill="#07101c"/>
+<rect width="1000" height="660" fill="#07101c"/>
 
 <!-- Título -->
-<text x="480" y="34" text-anchor="middle" class="titulo">C4 Nível 1 — Contexto do sistema</text>
-<text x="480" y="52" text-anchor="middle" class="sub">O Faro fica ao lado do firewall: lê o que o OPNsense registra e devolve regras pela API, consultando fontes de reputação e um modelo de IA</text>
-<line x1="20" y1="62" x2="940" y2="62" stroke="#1e3050" stroke-width="1"/>
+<text x="500" y="34" text-anchor="middle" font-size="17" font-weight="bold" fill="#4f91ff">C4 Nível 1 — Contexto do sistema Faro</text>
+<text x="500" y="54" text-anchor="middle" font-size="11" fill="#8ba3c0">O Faro fica ao lado do firewall: lê o que o OPNsense registra e devolve regras pela API.</text>
+<line x1="20" y1="64" x2="980" y2="64" stroke="#1e3050" stroke-width="1"/>
 
-<!-- ═══ FARO (centro, verde) ═══ -->
-<rect x="350" y="210" width="260" height="120" rx="8" fill="#0d2a1a" stroke="#22d67a" stroke-width="2"/>
-<text x="480" y="228" text-anchor="middle" class="tipo">[Sistema de software — em foco]</text>
-<text x="480" y="258" text-anchor="middle" class="label">Faro</text>
-<text x="480" y="276" text-anchor="middle" class="desc">correlaciona alertas e logs,</text>
-<text x="480" y="291" text-anchor="middle" class="desc">filtra por listas negras e</text>
-<text x="480" y="306" text-anchor="middle" class="desc">propõe regras de bloqueio com IA</text>
+<!-- ══ FARO — centro (verde) ══ -->
+<rect x="370" y="220" width="260" height="130" rx="8" fill="#0d2a1a" stroke="#22d67a" stroke-width="2"/>
+<text x="500" y="240" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Sistema de software — em foco]</text>
+<text x="500" y="263" text-anchor="middle" font-size="14" font-weight="bold" fill="#e8f0fe">Faro</text>
+<text x="500" y="281" text-anchor="middle" font-size="10" fill="#8ba3c0">correlaciona alertas e logs,</text>
+<text x="500" y="295" text-anchor="middle" font-size="10" fill="#8ba3c0">filtra por listas negras e</text>
+<text x="500" y="309" text-anchor="middle" font-size="10" fill="#8ba3c0">propõe regras de bloqueio com IA</text>
+<text x="500" y="341" text-anchor="middle" font-size="10" fill="#22d67a">VM Debian · Python 3.12</text>
 
-<!-- ═══ INTERNET (topo) ═══ -->
-<rect x="350" y="80" width="260" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="480" y="98" text-anchor="middle" class="tipo">[Origens externas]</text>
-<text x="480" y="128" text-anchor="middle" class="label">Internet</text>
-<text x="480" y="146" text-anchor="middle" class="desc">varreduras, exploits, bots</text>
+<!-- ══ INTERNET — topo ══ -->
+<rect x="370" y="88" width="260" height="88" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
+<text x="500" y="106" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Origens externas]</text>
+<text x="500" y="133" text-anchor="middle" font-size="14" font-weight="bold" fill="#e8f0fe">Internet</text>
+<text x="500" y="151" text-anchor="middle" font-size="10" fill="#8ba3c0">varreduras, exploits, bots</text>
+<text x="500" y="167" text-anchor="middle" font-size="10" fill="#8ba3c0">40+ países · 6.725 IPs únicos</text>
 
-<!-- ═══ ANALISTA TI (esquerda) ═══ -->
-<rect x="60" y="230" width="170" height="100" rx="8" fill="#0d1f3a" stroke="#4f91ff" stroke-width="2"/>
-<text x="145" y="248" text-anchor="middle" class="tipo">[Pessoa]</text>
-<text x="145" y="278" text-anchor="middle" class="label">Analista de TI</text>
-<text x="145" y="296" text-anchor="middle" class="desc">acompanha o funil e</text>
-<text x="145" y="311" text-anchor="middle" class="desc">aprova os bloqueios</text>
+<!-- ══ ANALISTA TI — esquerda ══ -->
+<rect x="60" y="230" width="175" height="110" rx="8" fill="#0d1f3a" stroke="#4f91ff" stroke-width="2"/>
+<text x="147" y="250" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Pessoa]</text>
+<text x="147" y="276" text-anchor="middle" font-size="14" font-weight="bold" fill="#e8f0fe">Analista de TI</text>
+<text x="147" y="295" text-anchor="middle" font-size="10" fill="#8ba3c0">acompanha o funil e</text>
+<text x="147" y="309" text-anchor="middle" font-size="10" fill="#8ba3c0">aprova os bloqueios</text>
+<text x="147" y="328" text-anchor="middle" font-size="10" fill="#4f91ff">navegador · http://:8080</text>
 
-<!-- ═══ OPNSENSE (direita cima) ═══ -->
-<rect x="720" y="160" width="200" height="110" rx="8" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
-<text x="820" y="178" text-anchor="middle" class="tipo">[Sistema existente]</text>
-<text x="820" y="208" text-anchor="middle" class="label">OPNsense</text>
-<text x="820" y="226" text-anchor="middle" class="desc">firewall PF e Suricata</text>
-<text x="820" y="241" text-anchor="middle" class="desc">IDS na interface WAN</text>
-<text x="820" y="256" text-anchor="middle" class="desc">OPNsense 26.7.8</text>
+<!-- ══ OPNSENSE — direita cima ══ -->
+<rect x="740" y="168" width="210" height="118" rx="8" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
+<text x="845" y="186" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Sistema existente]</text>
+<text x="845" y="212" text-anchor="middle" font-size="14" font-weight="bold" fill="#e8f0fe">OPNsense</text>
+<text x="845" y="230" text-anchor="middle" font-size="10" fill="#8ba3c0">firewall PF + Suricata IDS</text>
+<text x="845" y="245" text-anchor="middle" font-size="10" fill="#8ba3c0">interface WAN igb0</text>
+<text x="845" y="260" text-anchor="middle" font-size="10" fill="#8ba3c0">OPNsense 26.7.8 · igb0</text>
+<text x="845" y="276" text-anchor="middle" font-size="10" fill="#8ba3c0">172.16.0.1</text>
 
-<!-- ═══ SERVIDORES (direita baixo) ═══ -->
-<rect x="720" y="320" width="200" height="100" rx="8" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
-<text x="820" y="338" text-anchor="middle" class="tipo">[Sistema existente]</text>
-<text x="820" y="368" text-anchor="middle" class="label">Servidores expostos</text>
-<text x="820" y="386" text-anchor="middle" class="desc">web, DNS, honeypot em DMZ</text>
-<text x="820" y="401" text-anchor="middle" class="desc">172.16.0.x / DMZ</text>
+<!-- ══ SERVIDORES EXPOSTOS — direita baixo ══ -->
+<rect x="740" y="336" width="210" height="100" rx="8" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
+<text x="845" y="354" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Sistema existente]</text>
+<text x="845" y="378" text-anchor="middle" font-size="14" font-weight="bold" fill="#e8f0fe">Servidores expostos</text>
+<text x="845" y="396" text-anchor="middle" font-size="10" fill="#8ba3c0">web, DNS, honeypot em DMZ</text>
+<text x="845" y="412" text-anchor="middle" font-size="10" fill="#8ba3c0">172.16.0.x / DMZ</text>
 
-<!-- ═══ EXTERNOS (linha inferior) ═══ -->
+<!-- ══ FONTES EXTERNAS — linha inferior ══ -->
 <!-- AbuseIPDB -->
-<rect x="30"  y="460" width="150" height="80" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="105" y="478" text-anchor="middle" class="tipo">[Serviço externo]</text>
-<text x="105" y="508" text-anchor="middle" class="label">AbuseIPDB</text>
-<text x="105" y="526" text-anchor="middle" class="desc">reputação de IPs</text>
+<rect x="30"  y="490" width="155" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="107"  y="508" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Serviço externo]</text>
+<text x="107"  y="533" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8f0fe">AbuseIPDB</text>
+<text x="107"  y="550" text-anchor="middle" font-size="10" fill="#8ba3c0">reputação de IPs</text>
+<text x="107"  y="566" text-anchor="middle" font-size="10" fill="#8ba3c0">414.244 IPs · score 100</text>
 
-<!-- Spamhaus -->
-<rect x="200" y="460" width="150" height="80" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="275" y="478" text-anchor="middle" class="tipo">[Lista externa]</text>
-<text x="275" y="508" text-anchor="middle" class="label">Spamhaus DROP</text>
-<text x="275" y="526" text-anchor="middle" class="desc">blocos CIDR hostis</text>
+<!-- Spamhaus DROP -->
+<rect x="203" y="490" width="155" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="280"  y="508" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Lista externa]</text>
+<text x="280"  y="533" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8f0fe">Spamhaus DROP</text>
+<text x="280"  y="550" text-anchor="middle" font-size="10" fill="#8ba3c0">blocos CIDR hostis</text>
+<text x="280"  y="566" text-anchor="middle" font-size="10" fill="#8ba3c0">1.767 CIDRs</text>
 
-<!-- Modelo IA -->
-<rect x="370" y="460" width="150" height="80" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="445" y="478" text-anchor="middle" class="tipo">[Externo]</text>
-<text x="445" y="508" text-anchor="middle" class="label">Modelo de IA</text>
-<text x="445" y="526" text-anchor="middle" class="desc">LLM online ou local</text>
+<!-- Modelo de IA -->
+<rect x="376" y="490" width="155" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="453"  y="508" text-anchor="middle" font-size="9"  fill="#8ba3c0">[LLM online ou local]</text>
+<text x="453"  y="533" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8f0fe">Modelo de IA</text>
+<text x="453"  y="550" text-anchor="middle" font-size="10" fill="#8ba3c0">seleciona candidatos</text>
+<text x="453"  y="566" text-anchor="middle" font-size="10" fill="#8ba3c0">a bloqueio</text>
 
-<!-- Listas assinaturas -->
-<rect x="540" y="460" width="160" height="80" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="620" y="478" text-anchor="middle" class="tipo">[Fonte externa]</text>
-<text x="620" y="503" text-anchor="middle" class="label">Listas de</text>
-<text x="620" y="520" text-anchor="middle" class="label">assinaturas</text>
-<text x="620" y="535" text-anchor="middle" class="desc">ataques conhecidos</text>
+<!-- Listas de assinaturas -->
+<rect x="549" y="490" width="155" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="626"  y="508" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Fonte externa]</text>
+<text x="626"  y="528" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8f0fe">Listas de assinaturas</text>
+<text x="626"  y="546" text-anchor="middle" font-size="10" fill="#8ba3c0">ataques conhecidos</text>
+<text x="626"  y="562" text-anchor="middle" font-size="10" fill="#8ba3c0">Emerging Threats · ET PRO</text>
+<text x="626"  y="577" text-anchor="middle" font-size="10" fill="#8ba3c0">CVE-2021-35394 (Realtek)</text>
 
-<!-- ═══ SETAS ═══ -->
-<!-- Analista → Faro (valida e aprova) -->
-<line x1="230" y1="280" x2="350" y2="270" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="285" y="262" text-anchor="middle" class="seta">valida e aprova</text>
-<text x="285" y="274" text-anchor="middle" class="seta">[navegador :8080]</text>
+<!-- CrowdSec -->
+<rect x="722" y="490" width="155" height="90" rx="8" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="799"  y="508" text-anchor="middle" font-size="9"  fill="#8ba3c0">[Serviço externo]</text>
+<text x="799"  y="533" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8f0fe">CrowdSec</text>
+<text x="799"  y="550" text-anchor="middle" font-size="10" fill="#8ba3c0">blocklist colaborativa</text>
+<text x="799"  y="566" text-anchor="middle" font-size="10" fill="#8ba3c0">8.328 IPs ativos</text>
 
-<!-- Faro → OPNsense (lê alertas e logs) -->
-<line x1="610" y1="255" x2="720" y2="220" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="670" y="228" text-anchor="middle" class="seta">lê alertas e logs</text>
+<!-- ══ SETAS ══ -->
+<!-- Internet → OPNsense -->
+<line x1="630" y1="132" x2="740" y2="195" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="694" y="156" text-anchor="middle" font-size="9" fill="#8ba3c0">tráfego</text>
 
-<!-- OPNsense → Faro (cria regras API) -->
-<line x1="720" y1="240" x2="612" y2="275" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a)"/>
-<text x="672" y="270" text-anchor="middle" class="seta">cria regras [API REST]</text>
+<!-- OPNsense → Faro (lê alertas e logs) -->
+<line x1="740" y1="215" x2="630" y2="258" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="690" y="228" text-anchor="middle" font-size="9" fill="#8ba3c0">lê alertas e logs</text>
 
-<!-- OPNsense → Servidores (encaminha) -->
-<line x1="820" y1="270" x2="820" y2="320" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="855" y="300" class="seta">encaminha</text>
-<text x="855" y="313" class="seta">tráfego permitido</text>
+<!-- Faro → OPNsense (cria regras via API) -->
+<line x1="630" y1="275" x2="740" y2="248" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr)"/>
+<text x="690" y="273" text-anchor="middle" font-size="9" fill="#8ba3c0">cria regras [API REST]</text>
 
-<!-- Internet → Faro (tráfego) -->
-<line x1="480" y1="170" x2="480" y2="210" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#a)"/>
-<text x="510" y="195" class="seta">tráfego</text>
+<!-- OPNsense → Servidores -->
+<line x1="845" y1="286" x2="845" y2="336" stroke="#8ba3c0" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="878" y="316" font-size="9" fill="#8ba3c0">encaminha</text>
+<text x="878" y="329" font-size="9" fill="#8ba3c0">tráfego permitido</text>
+
+<!-- Analista → Faro -->
+<line x1="235" y1="278" x2="370" y2="270" stroke="#4f91ff" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="300" y="262" text-anchor="middle" font-size="9" fill="#8ba3c0">valida e aprova</text>
 
 <!-- AbuseIPDB → Faro -->
-<line x1="105" y1="460" x2="380" y2="330" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#a)"/>
-<text x="220" y="378" text-anchor="middle" class="seta">consulta [HTTPS]</text>
+<line x1="107" y1="490" x2="385" y2="348" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+<text x="216" y="400" text-anchor="middle" font-size="9" fill="#8ba3c0">consulta [HTTPS]</text>
 
 <!-- Spamhaus → Faro -->
-<line x1="350" y1="490" x2="410" y2="330" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#a)"/>
-<text x="368" y="412" class="seta">baixa a lista</text>
-
-<!-- Listas assinaturas → OPNsense -->
-<line x1="700" y1="460" x2="780" y2="270" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#a)"/>
-<text x="755" y="362" class="seta">atualizam</text>
-<text x="755" y="374" class="seta">o Suricata</text>
+<line x1="358" y1="490" x2="415" y2="350" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+<text x="372" y="430" text-anchor="middle" font-size="9" fill="#8ba3c0">baixa a lista</text>
 
 <!-- Modelo IA → Faro -->
-<line x1="445" y1="460" x2="455" y2="330" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#a)"/>
-<text x="484" y="398" class="seta">envia IPs</text>
-<text x="484" y="410" class="seta">restantes</text>
+<line x1="453" y1="490" x2="470" y2="350" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+<text x="490" y="435" text-anchor="middle" font-size="9" fill="#8ba3c0">envia IPs restantes</text>
 
-<!-- ═══ LEGENDA ═══ -->
-<line x1="20" y1="590" x2="940" y2="590" stroke="#1e3050" stroke-width="1"/>
-<rect x="30" y="600" width="12" height="12" rx="2" fill="#0d2a1a" stroke="#22d67a" stroke-width="2"/>
-<text x="47" y="611" class="leg">Sistema em foco</text>
-<rect x="170" y="600" width="12" height="12" rx="2" fill="#0d1f3a" stroke="#4f91ff" stroke-width="2"/>
-<text x="187" y="611" class="leg">Pessoa</text>
-<rect x="260" y="600" width="12" height="12" rx="2" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
-<text x="277" y="611" class="leg">Sistema existente</text>
-<rect x="410" y="600" width="12" height="12" rx="2" fill="#0a1520" stroke="#4a5568" stroke-width="2"/>
-<text x="427" y="611" class="leg">Externo ao laboratório</text>
-<line x1="590" y1="606" x2="620" y2="606" stroke="#4f91ff" stroke-width="1.5"/>
-<text x="625" y="611" class="leg">relação síncrona</text>
-<line x1="730" y1="606" x2="760" y2="606" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="6,4"/>
-<text x="765" y="611" class="leg">relação assíncrona</text>
+<!-- Listas assinaturas → OPNsense -->
+<line x1="704" y1="490" x2="800" y2="286" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+<text x="762" y="378" text-anchor="middle" font-size="9" fill="#8ba3c0">atualizam o Suricata</text>
+
+<!-- CrowdSec → Faro -->
+<line x1="799" y1="490" x2="615" y2="350" stroke="#4f91ff" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+<text x="724" y="440" text-anchor="middle" font-size="9" fill="#8ba3c0">blocklist</text>
+
+<!-- ══ LEGENDA ══ -->
+<line x1="20" y1="626" x2="980" y2="626" stroke="#1e3050" stroke-width="1"/>
+<rect x="30"  y="635" width="12" height="12" rx="2" fill="#0d2a1a" stroke="#22d67a" stroke-width="2"/>
+<text x="47"  y="646" font-size="11" fill="#8ba3c0">Sistema em foco (Faro)</text>
+<rect x="195" y="635" width="12" height="12" rx="2" fill="#0d1f3a" stroke="#4f91ff" stroke-width="2"/>
+<text x="212" y="646" font-size="11" fill="#8ba3c0">Pessoa</text>
+<rect x="285" y="635" width="12" height="12" rx="2" fill="#0d1f30" stroke="#8ba3c0" stroke-width="2"/>
+<text x="302" y="646" font-size="11" fill="#8ba3c0">Sistema existente na rede</text>
+<rect x="490" y="635" width="12" height="12" rx="2" fill="#0a1520" stroke="#4a5568" stroke-width="1.5"/>
+<text x="507" y="646" font-size="11" fill="#8ba3c0">Externo ao laboratório</text>
+<line x1="680" y1="641" x2="710" y2="641" stroke="#4f91ff" stroke-width="1.5"/>
+<text x="715" y="646" font-size="11" fill="#8ba3c0">síncrona</text>
+<line x1="790" y1="641" x2="820" y2="641" stroke="#4f91ff" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="825" y="646" font-size="11" fill="#8ba3c0">assíncrona</text>
 </svg>
