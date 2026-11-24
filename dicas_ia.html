@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA no dia a dia — Aparecido Junior · LIAA 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07101c;--bg2:#0d1b2a;--card:#111f33;--line:#1e3050;
+  --azul:#4f91ff;--verde:#22d67a;--amar:#f5c518;--verm:#f04d4d;
+  --rosa:#e879f9;--ciano:#00d4ff;--cz:#8ba3c0;--bran:#e8f0fe;
+}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--bran);
+  font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden}
+
+/* ── Partículas ── */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.pt{position:absolute;border-radius:50%;animation:rise linear infinite;opacity:.15}
+@keyframes rise{0%{transform:translateY(110vh)}100%{transform:translateY(-10vh)}}
+
+/* ── Slides ── */
+#deck{position:relative;z-index:1;width:100%;height:100%;
+      display:flex;align-items:center;justify-content:center}
+
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem 3rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease;
+  transform:translateX(60px);
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.out{opacity:0;transform:translateX(-60px)}
+
+/* ── Nav ── */
+#nav{
+  position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);
+  z-index:10;display:flex;align-items:center;gap:1rem;
+  background:rgba(7,16,28,.85);backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-radius:40px;padding:.55rem 1.4rem;
+}
+#nav button{
+  background:none;border:none;color:var(--cz);font-size:1.1rem;
+  cursor:pointer;padding:.2rem .5rem;transition:color .2s;
+}
+#nav button:hover{color:var(--azul)}
+#dots{display:flex;gap:.5rem;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line);
+     transition:background .3s, transform .3s;cursor:pointer}
+.dot.on{background:var(--azul);transform:scale(1.4)}
+#counter{font-size:.82rem;color:var(--cz);min-width:3rem;text-align:center}
+
+/* ── Tipografia ── */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(79,145,255,.12);border:1px solid rgba(79,145,255,.3);
+  color:var(--azul);padding:.28rem .9rem;border-radius:20px;
+  font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.1;
+   color:var(--bran);text-align:center;margin-bottom:.6rem}
+h1 .g{background:linear-gradient(135deg,var(--azul),var(--rosa));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--bran);
+   margin-bottom:.5rem;text-align:center}
+.sub{font-size:clamp(.9rem,1.8vw,1.1rem);color:var(--cz);
+     text-align:center;max-width:700px;line-height:1.65}
+
+/* ── Cards ── */
+.grid{display:grid;gap:1rem;width:100%;max-width:1100px;margin-top:1.4rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+      padding:1.3rem 1.4rem;transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--azul);transform:translateY(-3px)}
+.card .ic{font-size:1.8rem;margin-bottom:.6rem}
+.card h3{color:var(--bran);font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.card p,.card li{font-size:.85rem;line-height:1.75;color:var(--cz)}
+.card ul{padding-left:1.1rem}
+.accent{height:4px;border-radius:8px 8px 0 0;margin:-1.3rem -1.4rem 1rem}
+
+/* ── Fluxo ── */
+.flow{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+      justify-content:center;margin-top:1.6rem}
+.fnode{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:.7rem 1.1rem;text-align:center;min-width:120px;
+  transition:border-color .25s;
+}
+.fnode .fi{font-size:1.4rem}
+.fnode .fn{font-size:.78rem;color:var(--cz);margin-top:.2rem}
+.farr{font-size:1.2rem;color:var(--line)}
+
+/* ── Tabela ok/nok ── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+     max-width:900px;margin-top:1.4rem;width:100%}
+.col-ok{background:rgba(34,214,122,.07);border:1px solid rgba(34,214,122,.3);
+        border-radius:14px;padding:1.2rem 1.4rem}
+.col-nok{background:rgba(240,77,77,.07);border:1px solid rgba(240,77,77,.3);
+         border-radius:14px;padding:1.2rem 1.4rem}
+.col-ok h3{color:var(--verde);font-size:.95rem;margin-bottom:.7rem}
+.col-nok h3{color:var(--verm);font-size:.95rem;margin-bottom:.7rem}
+.col-ok li,.col-nok li{font-size:.85rem;color:var(--cz);line-height:1.8;
+                        padding-left:1rem}
+
+/* ── Dicas ── */
+.dica{
+  display:flex;gap:.9rem;align-items:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:1rem 1.2rem;transition:border-color .25s;
+}
+.dica:hover{border-color:var(--azul)}
+.dica .di{font-size:1.6rem;flex-shrink:0}
+.dica h4{color:var(--bran);font-size:.9rem;font-weight:700;margin-bottom:.25rem}
+.dica p{font-size:.82rem;color:var(--cz);line-height:1.65}
+.dica code{background:var(--bg2);color:var(--azul);padding:.1rem .4rem;
+           border-radius:4px;font-size:.8em}
+.dicas-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;
+            max-width:1050px;width:100%;margin-top:1.2rem}
+
+/* ── Demo ── */
+.demo-box{
+  background:var(--card);border:2px solid var(--azul);border-radius:16px;
+  padding:1.6rem 2rem;max-width:800px;width:100%;margin-top:1.4rem;
+  text-align:center;
+}
+.demo-box p{font-size:1rem;color:var(--cz);line-height:1.75}
+.demo-box a{color:var(--azul);font-weight:700;text-decoration:none}
+.demo-box a:hover{text-decoration:underline}
+.stat-row{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem}
+.stat-pill{background:var(--bg2);border:1px solid var(--line);border-radius:10px;
+           padding:.6rem 1.2rem;text-align:center}
+.stat-pill .sv{font-size:1.4rem;font-weight:900;color:var(--azul)}
+.stat-pill .sl{font-size:.75rem;color:var(--cz);margin-top:.1rem}
+
+/* ── Slide 1 específico ── */
+#s1 .badge-row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem}
+.badge{background:var(--bg2);border:1px solid var(--line);border-radius:8px;
+       padding:.35rem .9rem;font-size:.78rem;color:var(--cz)}
+
+/* ── Slide 6 específico ── */
+.qr-area{display:flex;gap:2rem;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:1.4rem}
+.qr-box{background:var(--card);border:1px solid var(--azul);border-radius:14px;
+        padding:1.4rem;text-align:center;min-width:200px}
+.qr-box p{font-size:.82rem;color:var(--cz);margin-top:.5rem}
+.url{font-size:1rem;color:var(--azul);font-weight:700;word-break:break-all}
+
+/* ── Utilitários ── */
+.ok{color:var(--verde);font-weight:700}
+.warn{color:var(--amar);font-weight:700}
+.err{color:var(--verm);font-weight:700}
+code{background:var(--bg2);color:var(--azul);padding:.1rem .45rem;
+     border-radius:5px;font-size:.85em}
+.kbd{display:inline-block;background:var(--bg2);border:1px solid var(--line);
+     border-radius:5px;padding:.1rem .5rem;font-size:.8rem;color:var(--cz);
+     font-family:monospace}
+
+/* ── Progress bar ── */
+#progress{
+  position:fixed;top:0;left:0;height:3px;background:var(--azul);
+  transition:width .4s ease;z-index:20;
+}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="progress"></div>
+
+<div id="deck">
+
+  <!-- ══ SLIDE 1 — TÍTULO ══ -->
+  <section class="slide active" id="s1">
+    <div class="eyebrow">⚡ Atividade 17 · LIAA 2026/2 · UNIPAMPA</div>
+    <h1>IA no dia a dia:<br><span class="g">do prompt ao produto</span></h1>
+    <p class="sub">Como usei IA e agentes para construir um sistema real de segurança —<br>
+      e o que aprendi no caminho.</p>
+    <div class="badge-row">
+      <span class="badge">🎬 Vídeo com Manim + Edge TTS</span>
+      <span class="badge">🤖 Agente controlando firewall via API</span>
+      <span class="badge">🌐 Site publicado no GitHub Pages</span>
+      <span class="badge">🔒 OPNsense + Suricata + IA</span>
+      <span class="badge">👨‍💻 Kiro IDE como co-piloto</span>
+    </div>
+    <p style="margin-top:1.4rem;font-size:.82rem;color:var(--cz)">
+      Aparecido de Souza Vieira Junior · Mestrado 2026
+    </p>
+  </section>
+
+  <!-- ══ SLIDE 2 — O QUE FIZ ══ -->
+  <section class="slide" id="s2">
+    <div class="eyebrow">📦 O que foi construído</div>
+    <h2>Três entregas reais com IA</h2>
+    <div class="grid g3" style="max-width:1000px">
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--azul),#2563eb)"></div>
+        <div class="ic">🛡</div>
+        <h3>Pipeline Faro</h3>
+        <ul>
+          <li>48.915 alertas do Suricata correlacionados com o filterlog do OPNsense</li>
+          <li>Community ID como chave de junção exata</li>
+          <li>5 regras de bloqueio propostas via API REST</li>
+          <li>0% falso positivo em 336k fluxos benignos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
+        <div class="ic">🌐</div>
+        <h3>Site do projeto</h3>
+        <ul>
+          <li>HTML/CSS/JS gerado com Kiro em sessões iterativas</li>
+          <li>Mapa de ataques animado com D3.js</li>
+          <li>Diagramas C4 em SVG</li>
+          <li>Publicado no GitHub Pages automaticamente</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--rosa),#7c3aed)"></div>
+        <div class="ic">🎬</div>
+        <h3>Vídeo institucional</h3>
+        <ul>
+          <li>Animações vetoriais com Manim (Python)</li>
+          <li>Narração neural PT-BR com Edge TTS</li>
+          <li>3 vozes distintas por personagem</li>
+          <li>Montagem automática com ffmpeg</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 3 — FLUXO ══ -->
+  <section class="slide" id="s3">
+    <div class="eyebrow">⚙️ Fluxo de trabalho</div>
+    <h2>Prompt → Código → Publicação</h2>
+    <p class="sub">Tudo feito dentro do Kiro IDE — o agente escreve, executa, corrige e commita.</p>
+
+    <div class="flow">
+      <div class="fnode" style="border-color:var(--azul)">
+        <div class="fi">💬</div>
+        <div class="fn">Descrevo<br>o problema</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fnode" style="border-color:var(--ciano)">
+        <div class="fi">🤖</div>
+        <div class="fn">Kiro escreve<br>o código</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fnode" style="border-color:var(--verde)">
+        <div class="fi">▶</div>
+        <div class="fn">Executa e<br>verifica</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fnode" style="border-color:var(--amar)">
+        <div class="fi">🔧</div>
+        <div class="fn">Corrige<br>erros</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fnode" style="border-color:var(--rosa)">
+        <div class="fi">📦</div>
+        <div class="fn">git commit<br>+ push</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fnode" style="border-color:var(--verde)">
+        <div class="fi">🌐</div>
+        <div class="fn">Publicado<br>no ar</div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="max-width:960px;margin-top:1.4rem">
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--azul),var(--ciano))"></div>
+        <h3>🎬 Para o vídeo</h3>
+        <p><strong style="color:var(--bran)">Prompt:</strong> "Crie uma cena Manim onde pacotes vermelhos atacam um servidor sem firewall"<br><br>
+        Kiro escreveu, renderizou, mediu duração, ajustou timing e montou o MP4 com áudio.</p>
+      </div>
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
+        <h3>🔒 Para o firewall</h3>
+        <p><strong style="color:var(--bran)">Prompt:</strong> "Chama a API do OPNsense e bloqueia esse IP via regra com UUID rastreável"<br><br>
+        Kiro gerou o <code>propor_regra.py</code>, testou, configurou a chave SSH e subiu o dashboard.</p>
+      </div>
+      <div class="card">
+        <div class="accent" style="background:linear-gradient(90deg,var(--rosa),#7c3aed)"></div>
+        <h3>🌐 Para o site</h3>
+        <p><strong style="color:var(--bran)">Prompt:</strong> "Adiciona seção de vídeo com player e legenda das cenas"<br><br>
+        Kiro editou o HTML, commitou e fez push — tudo em uma mensagem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 4 — O QUE FUNCIONOU / O QUE NÃO FUNCIONOU ══ -->
+  <section class="slide" id="s4">
+    <div class="eyebrow">📊 Lições aprendidas</div>
+    <h2>O que funcionou — e o que não funcionou</h2>
+    <div class="cmp">
+      <div class="col-ok">
+        <h3>✅ Funcionou bem</h3>
+        <ul>
+          <li>Kiro controlando Git, SSH e APIs — sem sair do chat</li>
+          <li>Manim para animações vetoriais profissionais</li>
+          <li>Edge TTS: voz neural PT-BR gratuita, 3 vozes distintas</li>
+          <li>ffmpeg para montar áudio + vídeo + trilha automaticamente</li>
+          <li>Pedir ao agente para <strong style="color:var(--verde)">verificar antes de commitar</strong></li>
+          <li>Dividir o problema em cenas menores e iterar</li>
+          <li>Descrever o <em>resultado esperado</em>, não o como fazer</li>
+        </ul>
+      </div>
+      <div class="col-nok">
+        <h3>❌ Não funcionou / aprendizados</h3>
+        <ul>
+          <li><strong style="color:var(--verm)">ElevenLabs</strong> bloqueou VM por detectar IP de servidor — usou Edge TTS</li>
+          <li>Vídeo cortava o áudio: <code>-shortest</code> parava no fim do vídeo, não do áudio</li>
+          <li>Texto saindo da tela: Manim não avisa — precisa checar área segura</li>
+          <li>Voz Thalita (Multilingual) mudava de idioma automaticamente no meio da narração</li>
+          <li>gTTS é robótico — só serve para protótipo, não para produto final</li>
+          <li>Render de 15.000 frames em 1920×1080 travou por timeout</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1rem;font-size:.85rem;color:var(--cz);text-align:center">
+      💡 <strong style="color:var(--amar)">Regra que aprendi:</strong>
+      Sempre medir a duração do áudio <em>antes</em> de renderizar o vídeo — não depois.
+    </p>
+  </section>
+
+  <!-- ══ SLIDE 5 — DICAS ══ -->
+  <section class="slide" id="s5">
+    <div class="eyebrow">💡 Dicas práticas</div>
+    <h2>5 dicas que você usa amanhã</h2>
+    <div class="dicas-grid">
+      <div class="dica">
+        <div class="di">🗂</div>
+        <div>
+          <h4>Dê contexto, não comandos</h4>
+          <p>Em vez de "escreva um script Python", diga "tenho logs do Suricata em JSON e quero cruzar com o filterlog usando Community ID — escreve o correlacionador". Quanto mais contexto, menos iterações.</p>
+        </div>
+      </div>
+      <div class="dica">
+        <div class="di">🔁</div>
+        <div>
+          <h4>Itere em cenas pequenas</h4>
+          <p>Para vídeos: gere 1 cena, assista, ajuste, depois gere as outras. Não tente gerar tudo de uma vez — você vai perder tempo corrigindo 10 cenas erradas.</p>
+        </div>
+      </div>
+      <div class="dica">
+        <div class="di">🎙</div>
+        <div>
+          <h4>Edge TTS para narração gratuita</h4>
+          <p><code>pip install edge-tts</code> — vozes neurais da Microsoft, PT-BR, sem API key. Use <code>pt-BR-AntonioNeural</code> (masculina) e <code>pt-BR-FranciscaNeural</code> (feminina) para variar.</p>
+        </div>
+      </div>
+      <div class="dica">
+        <div class="di">🧪</div>
+        <div>
+          <h4>Peça ao agente para verificar</h4>
+          <p>Após qualquer mudança importante, diga: "antes de commitar, verifica se o resultado está correto". O agente roda testes, mede durações, compara — e você evita publicar algo quebrado.</p>
+        </div>
+      </div>
+      <div class="dica">
+        <div class="di">🔑</div>
+        <div>
+          <h4>Nunca cole chaves no chat público</h4>
+          <p>Use variáveis de ambiente ou arquivos <code>.conf</code> fora do repositório. Chaves no histórico do chat ou no GitHub são um risco real — mesmo em repositórios privados.</p>
+        </div>
+      </div>
+      <div class="dica">
+        <div class="di">📏</div>
+        <div>
+          <h4>Meça antes de assumir</h4>
+          <p>Vídeo cortando? Mede o áudio com <code>ffprobe</code> antes de renderizar. Texto saindo da tela? Calcula as coordenadas antes de animar. IA não sabe o que não pode ver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 6 — DEMO + ENCERRAMENTO ══ -->
+  <section class="slide" id="s6">
+    <div class="eyebrow">🚀 Demo ao vivo</div>
+    <h2>Resultado: projeto Faro no ar</h2>
+    <div class="demo-box">
+      <p>
+        Pipeline completo rodando em produção — do alerta do Suricata à regra no firewall,<br>
+        com dashboard em tempo real, vídeo institucional e site publicado.
+      </p>
+      <div class="stat-row">
+        <div class="stat-pill">
+          <div class="sv">48.915</div>
+          <div class="sl">alertas analisados</div>
+        </div>
+        <div class="stat-pill">
+          <div class="sv">5</div>
+          <div class="sl">regras ativas no PF</div>
+        </div>
+        <div class="stat-pill">
+          <div class="sv">0%</div>
+          <div class="sl">falso positivo</div>
+        </div>
+        <div class="stat-pill">
+          <div class="sv">~0</div>
+          <div class="sl">linhas escritas à mão</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qr-area">
+      <div class="qr-box">
+        <div style="font-size:2rem">🌐</div>
+        <p class="url">liaa-aparecido.github.io</p>
+        <p>Site do projeto + vídeo + C4</p>
+      </div>
+      <div class="qr-box">
+        <div style="font-size:2rem">📊</div>
+        <p class="url">172.16.0.139:8080</p>
+        <p>Dashboard ao vivo (rede local)</p>
+      </div>
+      <div class="qr-box">
+        <div style="font-size:2rem">📦</div>
+        <p class="url">github.com/liaa-aparecido/firewall-ia</p>
+        <p>Código do pipeline</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1.4rem;font-size:.88rem;color:var(--cz);text-align:center">
+      <strong style="color:var(--verde)">Ferramenta principal:</strong>
+      Kiro IDE (kiro.dev) —
+      <strong style="color:var(--azul)">Manim</strong> (manim.community) —
+      <strong style="color:var(--rosa)">Edge TTS</strong> (pip install edge-tts) —
+      <strong style="color:var(--amar)">ffmpeg</strong> (ffmpeg.org)
+    </p>
+  </section>
+
+</div><!-- /deck -->
+
+<!-- ── Navegação ── -->
+<nav id="nav">
+  <button id="prev" title="Anterior">◀</button>
+  <div id="dots"></div>
+  <button id="next" title="Próximo">▶</button>
+  <span id="counter">1 / 6</span>
+</nav>
+
+<script>
+/* ── Partículas ── */
+(function(){
+  var c=document.getElementById('bg');
+  var cols=['#4f91ff','#22d67a','#f5c518','#e879f9','#00d4ff'];
+  for(var i=0;i<70;i++){
+    var d=document.createElement('div');d.className='pt';
+    var s=Math.random()*5+1;
+    d.style.width=s+'px';d.style.height=s+'px';
+    d.style.left=(Math.random()*100)+'%';
+    d.style.background=cols[Math.floor(Math.random()*cols.length)];
+    d.style.animationDuration=(Math.random()*20+15)+'s';
+    d.style.animationDelay='-'+(Math.random()*20)+'s';
+    c.appendChild(d);
+  }
+})();
+
+/* ── Deck ── */
+var slides=Array.from(document.querySelectorAll('.slide'));
+var total=slides.length;
+var cur=0;
+
+var dotsEl=document.getElementById('dots');
+var counterEl=document.getElementById('counter');
+var progressEl=document.getElementById('progress');
+
+// Cria dots
+slides.forEach(function(_,i){
+  var d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.addEventListener('click',function(){go(i)});
+  dotsEl.appendChild(d);
+});
+
+function go(n){
+  if(n<0||n>=total)return;
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('out');
+  setTimeout(function(){slides[cur].classList.remove('out')},460);
+  cur=n;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot').forEach(function(d,i){
+    d.classList.toggle('on',i===cur);
+  });
+  counterEl.textContent=(cur+1)+' / '+total;
+  progressEl.style.width=((cur+1)/total*100)+'%';
+}
+
+document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
+document.getElementById('next').addEventListener('click',function(){go(cur+1)});
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' ')go(cur+1);
+  if(e.key==='ArrowLeft')go(cur-1);
+});
+
+// Swipe mobile
+var tx=0;
+document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},false);
+document.addEventListener('touchend',function(e){
+  var dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){dx<0?go(cur+1):go(cur-1)}
+},false);
+
+// Barra de progresso inicial
+progressEl.style.width=((1)/total*100)+'%';
+</script>
+</body>
+</html>
