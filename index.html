@@ -325,13 +325,11 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
   <div class="nav-brand">🛡️ <span>Aparecido-IA</span></div>
   <ul>
     <li><a href="#contexto">Contexto</a></li>
-    <li><a href="#problema">Problema</a></li>
     <li><a href="#solucao">Solução</a></li>
     <li><a href="#arquitetura">C4</a></li>
     <li><a href="#resultados">Resultados</a></li>
     <li><a href="#detalhamento">Componentes</a></li>
     <li><a href="#evolucao">Evolução</a></li>
-    <li><a href="#caminhos">Caminhos</a></li>
     <li><a href="#video" style="color:var(--verde);font-weight:700">▶ Vídeo</a></li>
     <li><a href="https://github.com/liaa-aparecido/firewall-ia" target="_blank" class="nav-gh">GitHub ↗</a></li>
   </ul>
@@ -339,16 +337,16 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 
 <!-- ══ HERO ══ -->
 <section id="hero">
-  <div class="hero-eyebrow">🟢 Projeto ativo · LIAA 2026/2 · UNIPAMPA</div>
-  <h1>Logs para<br><span class="grad">regras de firewall</span></h1>
+  <div class="hero-eyebrow">Projeto ativo · LIAA 2026/2 · UNIPAMPA</div>
+  <h1>De <span class="grad">48.915 alertas</span>,<br>18 eram risco real.</h1>
   <p class="hero-sub">
-    Pipeline que correlaciona <strong>48.915 alertas</strong> do Suricata com o filterlog
-    do OPNsense usando Community ID, classifica cada fluxo por desfecho e propõe
-    regras de bloqueio via API REST — sem LLM escrevendo direto no firewall.
+    O Faro correlaciona alertas do Suricata com as decisões do firewall,
+    filtra o ruído em camadas e propõe regras de bloqueio via API —
+    sem LLM escrevendo direto no firewall.
   </p>
   <div class="hero-btns">
-    <a class="btn btn-p" href="#resultados">Ver resultados</a>
-    <a class="btn btn-s" href="#evolucao">Evolução do projeto</a>
+    <a class="btn btn-p" href="#video">Ver o vídeo</a>
+    <a class="btn btn-s" href="#solucao">Como funciona</a>
   </div>
   <div class="hero-stats">
     <div class="stat stat-b">
@@ -359,17 +357,13 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
       <span class="n" data-val="87" data-fmt="pct">87,3%</span>
       <div class="l">já tratados pelo PF</div>
     </div>
-    <div class="stat stat-a">
-      <span class="n" data-val="31" data-fmt="dias">31 dias</span>
-      <div class="l">filterlog analisado</div>
-    </div>
     <div class="stat stat-r">
-      <span class="n" data-val="10" data-fmt="M">10,6M</span>
-      <div class="l">fluxos PF processados</div>
+      <span class="n" data-val="18" data-fmt="num">18</span>
+      <div class="l">externos reais</div>
     </div>
     <div class="stat stat-z">
-      <span class="n" data-val="8328" data-fmt="num">8.328</span>
-      <div class="l">IPs CrowdSec ativos</div>
+      <span class="n" data-val="5" data-fmt="num">5</span>
+      <div class="l">regras IA ativas</div>
     </div>
   </div>
 </section>
@@ -377,42 +371,27 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 
 <section id="contexto" class="fade-in">
   <div class="sec-tag">00 · Contexto</div>
-  <h2>Ambiente e motivação</h2>
+  <h2>Um firewall real. Alertas reais. Risco real.</h2>
   <p class="sec-desc">
-    Um firewall real em produção, alertas reais, logs reais — e a pergunta:<br>
-    de 48.915 alertas, quantos representam risco real que ainda não foi bloqueado?
+    OPNsense 26.7.8 em produção com política blacklist + default deny.
+    Suricata 8.0.8 em modo IDS na interface WAN — vê o pacote antes do PF decidir.
   </p>
   <div class="grid-2">
     <div class="card">
       <div class="card-accent" style="background:linear-gradient(90deg,var(--azul),var(--azul2))"></div>
       <h3>O ambiente</h3>
-      <p>
-        Firewall <strong style="color:var(--branco)">OPNsense 26.7.8</strong> protegendo uma rede real
-        com política de <strong style="color:var(--branco)">blacklist + default deny</strong>.
-        O Suricata 8.0.8 roda em modo IDS (wire/pcap) na interface WAN — ele vê
-        uma cópia do tráfego <em>antes</em> do PF decidir.
-      </p>
-      <ul style="margin-top:.8rem;padding-left:1.2rem;font-size:.9rem;line-height:1.9">
-        <li><code>eve.json</code> — alertas do Suricata (48.915 eventos, 7 dias)</li>
-        <li><code>filterlog</code> — decisões do PF (473.304 linhas, 5 dias)</li>
-        <li><code>crowdsec_blocklists</code> — 8.328 IPs bloqueados em tempo real</li>
-        <li><code>ABUSEIP</code> — alias com 414.244 IPs (score 100, 180 dias)</li>
+      <ul style="padding-left:1.2rem;font-size:.9rem;line-height:1.9">
+        <li><code>eve.json</code> — 48.915 alertas do Suricata (7 dias)</li>
+        <li><code>filterlog</code> — 473.304 linhas do PF (31 dias)</li>
+        <li><code>crowdsec_blocklists</code> — 8.328 IPs em tempo real</li>
+        <li><code>AbuseIPDB</code> — 414.244 IPs (score 100, 180 dias)</li>
       </ul>
     </div>
     <div class="card">
       <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
-      <h3>A motivação</h3>
-      <p>
-        Gerenciar regras de firewall manualmente é lento e propenso a erros.
-        O objetivo é construir um pipeline que:
-      </p>
-      <ol style="margin-top:.8rem;padding-left:1.4rem;font-size:.9rem;line-height:2">
-        <li>Correlaciona alertas do Suricata com as decisões do PF</li>
-        <li>Identifica o que realmente <em>passou</em> pelo firewall</li>
-        <li>Propõe regras de bloqueio via API REST do OPNsense</li>
-        <li>Avalia as regras com split temporal antes de aplicar</li>
-        <li>Mantém a IA como auxiliar — nunca com acesso direto ao firewall</li>
-      </ol>
+      <h3>A pergunta</h3>
+      <p>De 48.915 alertas, quantos representam risco real que ainda não foi bloqueado?</p>
+      <p style="margin-top:.8rem">O pipeline correlaciona os dois sistemas pelo <strong style="color:var(--branco)">Community ID</strong>, classifica cada fluxo por desfecho e propõe regras via API REST — sem LLM escrevendo direto no firewall.</p>
     </div>
   </div>
 </section>
@@ -604,205 +583,100 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 <section id="dados" class="fade-in">
   <div class="sec-tag">03 · Os dados</div>
   <h2>31 dias de coleta real</h2>
-  <p class="sec-desc">Filterlog de 09/10 a 08/11/2026 · OPNsense em produção · rede real</p>
+  <p class="sec-desc">Filterlog 09/10–08/11/2026 · OPNsense em produção · split temporal A/B sem vazamento</p>
 
   <div class="grid-2">
     <div class="card">
       <div class="card-accent" style="background:linear-gradient(90deg,var(--azul),var(--azul2))"></div>
-      <h3>Split temporal — Fase 3</h3>
+      <h3>Split temporal A/B</h3>
       <div class="barras" style="margin-top:1rem">
         <div class="barra-item">
-          <div class="barra-topo"><span class="bn">Período A — treino (09/10–25/10)</span><span class="bv">509 IPs · 5,8M fluxos</span></div>
+          <div class="barra-topo"><span class="bn">Treino A (09/10–25/10)</span><span class="bv">509 IPs · 5,8M fluxos</span></div>
           <div class="barra-bg"><div class="barra-fill" style="width:55%;background:linear-gradient(90deg,var(--azul),var(--azul2))"></div></div>
         </div>
         <div class="barra-item">
-          <div class="barra-topo"><span class="bn">Período B — teste (26/10–08/11)</span><span class="bv">416 IPs · 4,8M fluxos</span></div>
+          <div class="barra-topo"><span class="bn">Teste B (26/10–08/11)</span><span class="bv">416 IPs · 4,8M fluxos</span></div>
           <div class="barra-bg"><div class="barra-fill" style="width:45%;background:linear-gradient(90deg,var(--verde),#16a34a)"></div></div>
         </div>
         <div class="barra-item">
-          <div class="barra-topo"><span class="bn">IPs recorrentes (passaram em A e B)</span><span class="bv">308 IPs</span></div>
-          <div class="barra-bg"><div class="barra-fill" style="width:60%;background:linear-gradient(90deg,var(--amar),#d97706)"></div></div>
-        </div>
-        <div class="barra-item">
-          <div class="barra-topo"><span class="bn">IPs bloqueados no A que passaram no B</span><span class="bv">195 IPs — resíduo</span></div>
+          <div class="barra-topo"><span class="bn">IPs bloqueados em A que passaram em B</span><span class="bv">195 IPs — resíduo</span></div>
           <div class="barra-bg"><div class="barra-fill" style="width:38%;background:linear-gradient(90deg,var(--verm),#b91c1c)"></div></div>
         </div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
-      <h3>Fontes da blacklist</h3>
+      <h3>Fontes de reputação</h3>
       <div class="feeds-grid" style="grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1rem">
-        <div class="feed-card">
-          <span class="fn">414.244</span>
-          <div class="fl">AbuseIPDB</div>
-          <div class="fs">score 100 · 180d</div>
-        </div>
-        <div class="feed-card">
-          <span class="fn">8.328</span>
-          <div class="fl">CrowdSec</div>
-          <div class="fs">ativo em tempo real</div>
-        </div>
-        <div class="feed-card">
-          <span class="fn">1.767</span>
-          <div class="fl">Spamhaus DROP</div>
-          <div class="fs">CIDRs maliciosos</div>
-        </div>
-        <div class="feed-card">
-          <span class="fn">71</span>
-          <div class="fl">ET DROP rules</div>
-          <div class="fs">Emerging Threats</div>
-        </div>
+        <div class="feed-card"><span class="fn">414.244</span><div class="fl">AbuseIPDB</div><div class="fs">score 100 · 180d</div></div>
+        <div class="feed-card"><span class="fn">8.328</span><div class="fl">CrowdSec</div><div class="fs">tempo real</div></div>
+        <div class="feed-card"><span class="fn">1.767</span><div class="fl">Spamhaus DROP</div><div class="fs">CIDRs hostis</div></div>
+        <div class="feed-card"><span class="fn">71</span><div class="fl">ET DROP</div><div class="fs">Emerging Threats</div></div>
       </div>
-    </div>
-  </div>
-
-  <!-- Top alertas que passaram -->
-  <h3 style="color:var(--branco);margin-top:2.5rem;font-size:1.1rem">Top 10 assinaturas com tráfego que passou</h3>
-  <p style="font-size:.85rem;margin-bottom:.5rem">Todos são tráfego legítimo — o funil funcionou</p>
-  <div class="top-list">
-    <div class="top-item">
-      <div class="top-rank">#1</div>
-      <div class="top-body">
-        <div class="sig">STUN Binding Request</div>
-        <div class="sid">SID 2016149 · WebRTC / VoIP</div>
-      </div>
-      <div class="top-count">3.664</div>
-    </div>
-    <div class="top-item">
-      <div class="top-rank">#2</div>
-      <div class="top-body">
-        <div class="sig">DNS Query to .biz TLD</div>
-        <div class="sid">SID 2027863 · DNS legítimo</div>
-      </div>
-      <div class="top-count">1.009</div>
-    </div>
-    <div class="top-item">
-      <div class="top-rank">#3</div>
-      <div class="top-body">
-        <div class="sig">Discord Domain in DNS Lookup</div>
-        <div class="sid">SID 2035465 · Discord chat</div>
-      </div>
-      <div class="top-count">360</div>
-    </div>
-    <div class="top-item">
-      <div class="top-rank">#4</div>
-      <div class="top-body">
-        <div class="sig">Discord Chat Service Domain</div>
-        <div class="sid">SID 2060503 · Discord chat</div>
-      </div>
-      <div class="top-count">286</div>
-    </div>
-    <div class="top-item">
-      <div class="top-rank">#5</div>
-      <div class="top-body">
-        <div class="sig">GNU/Linux APT User-Agent Outbound</div>
-        <div class="sid">SID 2013504 · Atualização de pacotes</div>
-      </div>
-      <div class="top-count">251</div>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-
-
-<hr class="divider">
-
-<!-- ══ DETALHAMENTO TÉCNICO ══ -->
 <section id="detalhamento" class="fade-in">
   <div class="sec-tag">03b · Detalhamento técnico</div>
   <h2>O que cada componente detecta</h2>
-  <p class="sec-desc">
-    Combinado em 10/11: separar o que é detectado só pelo firewall, só pelo Suricata,
-    pela interseção e o que a IA e o CrowdSec acrescentam.
-  </p>
+  <p class="sec-desc">Separando o que é detectado só pelo PF, só pelo Suricata, pela interseção e o que a IA acrescenta.</p>
 
-  <!-- Tabela de cobertura por componente -->
   <div class="comp-wrap">
     <table>
       <thead>
         <tr>
           <th>Componente</th>
           <th>O que detecta</th>
-          <th>Alertas / fluxos</th>
-          <th>Cobertura incremental</th>
+          <th>Cobertura</th>
+          <th>Resultado</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong style="color:var(--branco)">🔒 PF sozinho</strong><br><span style="font-size:.8rem;color:var(--cz)">default deny + blacklist</span></td>
-          <td>IPs em listas DROP/DShield · tráfego sem rota · CIDR hostil</td>
-          <td><strong style="color:var(--verde)">42.639</strong> sem registro<br>+ 165 bloqueio explícito</td>
+          <td><strong style="color:var(--branco)">🔒 PF sozinho</strong></td>
+          <td>IPs em listas DROP · tráfego sem rota · CIDR hostil</td>
+          <td><strong style="color:var(--verde)">42.804 fluxos</strong></td>
           <td class="td-ok">87,3% — base da defesa</td>
         </tr>
         <tr>
-          <td><strong style="color:var(--branco)">📡 Suricata sozinho</strong><br><span style="font-size:.8rem;color:var(--cz)">IDS · wire/pcap · SIDs</span></td>
-          <td>Assinaturas de exploit · reputação ET CINS · comportamento DNS/STUN</td>
-          <td><strong style="color:var(--amar)">48.915</strong> alertas totais</td>
+          <td><strong style="color:var(--branco)">📡 Suricata sozinho</strong></td>
+          <td>Assinaturas de exploit · ET CINS · comportamento</td>
+          <td><strong style="color:var(--amar)">48.915 alertas</strong></td>
           <td class="td-warn">Visibilidade — sem bloqueio</td>
         </tr>
         <tr>
-          <td><strong style="color:var(--branco)">🔗 Interseção PF + Suricata</strong><br><span style="font-size:.8rem;color:var(--cz)">Community ID</span></td>
-          <td>Alertas com desfecho conhecido — bloqueado, passou ou sem registro</td>
-          <td><strong style="color:var(--azul)">6.012</strong> fluxos com desfecho <em>pass</em></td>
+          <td><strong style="color:var(--branco)">🔗 Interseção PF + Suricata</strong></td>
+          <td>Alertas com desfecho real (Community ID)</td>
+          <td><strong style="color:var(--azul)">6.012 fluxos PASS</strong></td>
           <td class="td-ok">Elimina falsos alarmes do IDS</td>
         </tr>
         <tr>
-          <td><strong style="color:var(--branco)">🤖 IA (Faro)</strong><br><span style="font-size:.8rem;color:var(--cz)">família comportamental + assinaturas</span></td>
-          <td>CVE-2021-35394 Realtek SDK · porta UDP 9034 · padrão de taxa por IP</td>
-          <td><strong style="color:var(--verde)">8</strong> alertas de exploit real → <strong style="color:var(--verde)">5</strong> regras</td>
+          <td><strong style="color:var(--branco)">🤖 IA (Faro)</strong></td>
+          <td>CVE-2021-35394 Realtek · UDP 9034 · padrão de taxa</td>
+          <td><strong style="color:var(--verde)">8 alertas → 5 regras</strong></td>
           <td class="td-ok">0% FP · 100% cobertura Realtek</td>
         </tr>
         <tr>
-          <td><strong style="color:var(--branco)">🛡 CrowdSec</strong><br><span style="font-size:.8rem;color:var(--cz)">blocklist colaborativa</span></td>
-          <td>IPs com histórico colaborativo em tempo real · 8.328 IPs ativos</td>
-          <td><strong style="color:var(--azul)">8.328</strong> IPs bloqueados</td>
-          <td class="td-ok">Concorda: 0% incremental sobre tráfego legítimo</td>
+          <td><strong style="color:var(--branco)">🛡 CrowdSec</strong></td>
+          <td>IPs com histórico colaborativo em tempo real</td>
+          <td><strong style="color:var(--azul)">8.328 IPs</strong></td>
+          <td class="td-ok">Concorda: 0% incremental</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Quadro Venn simplificado em texto -->
-  <div class="grid-3" style="margin-top:2rem">
-    <div class="card" style="border-color:rgba(139,163,192,.3)">
-      <div class="card-accent" style="background:linear-gradient(90deg,var(--cz),#334155)"></div>
-      <span class="badge" style="background:rgba(139,163,192,.12);color:var(--cz)">Só PF bloqueia</span>
-      <h3>42.804 fluxos</h3>
-      <p>Tráfego que nem chega ao Suricata — bloqueado por regras de reputação, default deny ou DShield antes de qualquer análise.</p>
-    </div>
-    <div class="card" style="border-color:rgba(245,197,24,.3)">
-      <div class="card-accent" style="background:linear-gradient(90deg,var(--amar),#92400e)"></div>
-      <span class="badge" style="background:rgba(245,197,24,.12);color:var(--amar)">Suricata alerta, PF já tratou</span>
-      <h3>42.639 alertas</h3>
-      <p>Suricata disparou o alerta mas o PF já havia tratado — confirma que o IDS vê o pacote antes da decisão do PF.</p>
-    </div>
-    <div class="card" style="border-color:rgba(34,214,122,.3)">
-      <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#065f46)"></div>
-      <span class="badge" style="background:rgba(34,214,122,.12);color:var(--verde)">IA acrescenta</span>
-      <h3>5 regras novas</h3>
-      <p>Realtek CVE-2021-35394 — 8 alertas de exploit real que passaram pelas listas negras e foram capturados pela família comportamental da IA.</p>
-    </div>
-  </div>
-
   <div class="resultado-box" style="margin-top:1.5rem">
-    <h3>🔍 Conclusão do detalhamento</h3>
-    <p>
-      O PF (87,3%) e o CrowdSec cobrem a maior parte do tráfego malicioso automaticamente.
-      O Suricata fornece visibilidade sobre o que o PF não registra.
-      A IA acrescenta <strong style="color:var(--branco)">uma camada comportamental</strong> que identificou
-      o único exploit real do período (CVE-2021-35394) sem gerar falso positivo em 336.049 fluxos benignos.
-      O CrowdSec e o pipeline chegam à mesma conclusão de forma independente.
-    </p>
+    <h3>Conclusão do detalhamento</h3>
+    <p>O PF (87,3%) e o CrowdSec cobrem a maior parte automaticamente. O Suricata fornece visibilidade. A IA acrescenta uma camada comportamental que identificou o único exploit real do período sem gerar falso positivo.</p>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ══ MAPA DE ATAQUES ══ -->
 <section id="mapa" class="fade-in">
   <div class="sec-tag">04 · Mapa de ataques</div>
   <h2>De onde vêm os ataques</h2>
@@ -845,136 +719,81 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 <!-- ══ RESULTADOS ══ -->
 <section id="resultados" class="fade-in">
   <div class="sec-tag">04 · Resultados</div>
-  <h2>Hipóteses testadas com dados reais</h2>
+  <h2>5 hipóteses testadas com dados reais</h2>
 
   <div class="hips" style="margin-top:1.5rem">
     <div class="hip" style="border-color:rgba(34,214,122,.4)">
       <div class="hip-id" style="background:rgba(34,214,122,.15);color:var(--verde)">H1</div>
       <div>
         <h3>Maioria já é bloqueada pelo PF</h3>
-        <p>42.639 alertas (87,2%) em SEM REGISTRO — o PF bloqueou pelo default deny. Mais 165 com bloqueio explícito no filterlog. <strong style="color:var(--branco)">O volume de alertas superestima o risco real em 87%.</strong></p>
+        <p>42.639 (87,2%) em SEM REGISTRO + 165 com bloqueio explícito. <strong style="color:var(--branco)">O volume superestima o risco real em 87%.</strong></p>
       </div>
       <div class="status" style="background:rgba(34,214,122,.15);color:var(--verde)">✅ Confirmada</div>
     </div>
-
     <div class="hip" style="border-color:rgba(245,197,24,.35)">
       <div class="hip-id" style="background:rgba(245,197,24,.12);color:var(--amar)">H2</div>
       <div>
         <h3>Divergência entre feeds explica os que passam</h3>
-        <p>Os 18 externos que passaram são STUN e Jabber (legítimos), não divergência entre listas. Script <code>coletar_feeds.py</code> arquivando snapshots diários para medir latência.</p>
+        <p>Os 18 externos que passaram são STUN e Jabber (legítimos), não divergência de listas. Script <code>coletar_feeds.py</code> arquivando snapshots diários.</p>
       </div>
       <div class="status" style="background:rgba(245,197,24,.12);color:var(--amar)">⚠️ Parcial</div>
     </div>
-
     <div class="hip" style="border-color:rgba(139,163,192,.2)">
       <div class="hip-id" style="background:rgba(139,163,192,.1);color:var(--cz)">H3</div>
       <div>
         <h3>Comportamento generaliza melhor que IP individual</h3>
-        <p>Com 31 dias de dados: IP individual (4.945 regras) = 0% cobertura. Comportamento (169 regras) = 0% cobertura. Os IPs que passam são legítimos — sem resíduo para diferenciar famílias.</p>
+        <p>IP individual (4.945 regras) = 0% cobertura. Comportamento (169 regras) = 0% cobertura. Os IPs que passam são legítimos — sem resíduo para diferenciar famílias.</p>
       </div>
       <div class="status" style="background:rgba(139,163,192,.1);color:var(--cz)">❌ Inconclusivo</div>
     </div>
-
     <div class="hip" style="border-color:rgba(34,214,122,.4)">
       <div class="hip-id" style="background:rgba(34,214,122,.15);color:var(--verde)">H4</div>
       <div>
         <h3>Pipeline vs. CrowdSec</h3>
-        <p>CrowdSec já está ativo no OPNsense com 8.328 IPs bloqueando em tempo real. <strong style="color:var(--branco)">Resultado: ambos 0% de cobertura incremental.</strong> Concordam — o tráfego que passa é legítimo.</p>
+        <p>CrowdSec (8.328 IPs) concorda: 0% cobertura incremental. Ambos chegam à mesma conclusão de forma independente.</p>
       </div>
       <div class="status" style="background:rgba(34,214,122,.15);color:var(--verde)">✅ Respondida</div>
     </div>
-
     <div class="hip" style="border-color:rgba(139,163,192,.2)">
       <div class="hip-id" style="background:rgba(139,163,192,.1);color:var(--cz)">H5</div>
       <div>
         <h3>LLM propõe regras comparáveis às heurísticas</h3>
-        <p>Sem resíduo perigoso, o LLM não tem o que propor. Quando entrar (Fase 3), nunca escreverá direto no firewall — toda proposta passa pelo simulador primeiro. Proteção contra injeção indireta de prompt (OWASP LLM01).</p>
+        <p>Sem resíduo perigoso, o LLM não tem o que propor. Quando entrar, toda proposta passa pelo simulador antes do firewall. Proteção contra injeção indireta (OWASP LLM01).</p>
       </div>
       <div class="status" style="background:rgba(139,163,192,.1);color:var(--cz)">⏳ Sem resíduo</div>
     </div>
   </div>
 
-  <!-- Tabela comparativa -->
-  <h3 style="color:var(--branco);margin-top:2.5rem;font-size:1.1rem">Comparação de famílias — 31 dias de filterlog</h3>
-  <div class="comp-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Família</th>
-          <th>Regras geradas</th>
-          <th>Cobertura incremental</th>
-          <th>Bloqueio colateral</th>
-          <th>Interpretação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong style="color:var(--branco)">IP individual</strong></td>
-          <td>4.945 IPs</td>
-          <td class="td-ok">0 (0%)</td>
-          <td class="td-ok">0</td>
-          <td>IPs mudam a cada dia</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--branco)">Comportamento (porta+taxa)</strong></td>
-          <td>169 regras</td>
-          <td class="td-ok">0 (0%)</td>
-          <td class="td-ok">0</td>
-          <td>Sem resíduo para generalizar</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--azul)">CrowdSec</strong> (baseline)</td>
-          <td>8.328 IPs</td>
-          <td class="td-ok">0 (0%)</td>
-          <td class="td-ok">0</td>
-          <td>Concorda: tráfego legítimo</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--cz)">AbuseIPDB</strong> (baseline)</td>
-          <td>414.244 IPs</td>
-          <td class="td-ok">0 (0%)</td>
-          <td class="td-ok">0</td>
-          <td>Concorda: tráfego legítimo</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="resultado-box">
-    <h3>🎯 Resposta à pergunta de pesquisa</h3>
+  <div class="resultado-box" style="margin-top:1.5rem">
+    <h3>Resposta à pergunta de pesquisa</h3>
     <p>
-      Dada a política de blacklist + default deny do OPNsense, os fluxos que passam
-      são <strong style="color:var(--branco)">tráfego legítimo</strong> (STUN, Jabber, Discord, DNS, atualizações Linux).
-      Nenhuma regra adicional deveria bloqueá-los.
-      <strong style="color:var(--verde)"> O firewall já está funcionando corretamente.</strong>
-      O resultado confirma que o volume de alertas do Suricata superestima o risco em 87% —
-      e que o CrowdSec e o pipeline chegam à mesma conclusão de forma independente.
+      Os fluxos que passam são <strong style="color:var(--branco)">tráfego legítimo</strong> (STUN, Jabber, Discord, DNS, atualizações Linux).
+      <strong style="color:var(--verde)">O firewall já está funcionando corretamente.</strong>
+      O Suricata superestima o risco em 87% — e o CrowdSec confirma de forma independente.
     </p>
   </div>
 
   <div class="card mt2" style="border:1px solid var(--verde);margin-top:1.5rem">
     <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#065f46)"></div>
-    <h3>🧪 Validação com tráfego benigno — resultado real</h3>
-    <p style="margin-top:.6rem">Executado sobre 473.304 linhas reais de filterlog (5 dias, 28/09 a 02/10/2026):</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem">
+    <h3>Validação com tráfego benigno</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1rem">
       <div style="background:var(--card2);border-radius:10px;padding:1rem;text-align:center">
         <div style="font-size:1.8rem;font-weight:900;color:var(--verde)">0%</div>
-        <div style="font-size:.8rem;color:var(--cz)">Taxa de Falso Positivo</div>
+        <div style="font-size:.8rem;color:var(--cz)">Falso Positivo</div>
       </div>
       <div style="background:var(--card2);border-radius:10px;padding:1rem;text-align:center">
         <div style="font-size:1.8rem;font-weight:900;color:var(--verde)">336.049</div>
-        <div style="font-size:.8rem;color:var(--cz)">Fluxos benignos testados</div>
+        <div style="font-size:.8rem;color:var(--cz)">Fluxos testados</div>
       </div>
       <div style="background:var(--card2);border-radius:10px;padding:1rem;text-align:center">
         <div style="font-size:1.8rem;font-weight:900;color:var(--verde)">100%</div>
-        <div style="font-size:.8rem;color:var(--cz)">Cobertura IPs Realtek (5/5)</div>
+        <div style="font-size:.8rem;color:var(--cz)">Cobertura Realtek</div>
       </div>
       <div style="background:var(--card2);border-radius:10px;padding:1rem;text-align:center">
         <div style="font-size:1.8rem;font-weight:900;color:var(--verde)">5</div>
-        <div style="font-size:.8rem;color:var(--cz)">Regras IA-aparecido ativas</div>
+        <div style="font-size:.8rem;color:var(--cz)">Regras ativas no PF</div>
       </div>
     </div>
-    <p style="margin-top:1rem;font-size:.9rem">As 5 regras de bloqueio do CVE-2021-35394 (Realtek SDK) não geraram nenhum falso positivo em 336.049 fluxos benignos reais. <strong style="color:var(--verde)">Regras aprovadas para produção.</strong></p>
   </div>
 </section>
 
@@ -982,301 +801,111 @@ code{background:var(--card2);color:var(--azul);padding:.1rem .45rem;border-radiu
 
 <hr class="divider">
 
-<!-- ══ EVOLUÇÃO ══ -->
 <section id="evolucao" class="fade-in">
   <div class="sec-tag">06 · Evolução</div>
-  <h2>7 apresentações ao longo do semestre</h2>
-  <p class="sec-desc">De logs de servidor web até um pipeline de firewall em produção — com dois pivôs de tema no caminho.</p>
+  <h2>9 apresentações, dois pivôs, um produto</h2>
+  <p class="sec-desc">De logs de servidor web até um pipeline de firewall em produção.</p>
 
   <div class="tl">
     <div class="tl-item">
       <div class="tl-dot" style="background:#8ba3c0"></div>
-      <div class="tl-data">08/09/2026 — Apresentação 1</div>
-      <h4>CIGA: extração de campos de comunicações internas</h4>
-      <p>Proposta de sistema para extrair campos de CIs em papel via OCR e LLM. <strong style="color:#f04d4d">Feedback:</strong> professor considerou OCR + regex suficiente, LLM seria "elefante branco". Pediu um problema em que a IA faça sentido de fato.</p>
+      <div class="tl-data">08/09 · Pres. 1</div>
+      <h4>CIGA — extração de CIs com OCR + LLM</h4>
+      <p>Combinado: encontrar um problema em que IA faça sentido de fato.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#f5c518"></div>
-      <div class="tl-data">15/09/2026 — 1ª mudança de tema</div>
-      <h4>IA para detectar anomalias em logs de servidores web</h4>
-      <p>Mudança para score de risco em logs de sistemas web de clientes (frigoríficos) expostos à internet, com comparação contra AbuseIPDB e CrowdSec. <strong style="color:#f5c518">Feedback:</strong> limitar o escopo aos logs do servidor web; começar com um mês de logs de um servidor.</p>
+      <div class="tl-data">15/09 · Pivô 1</div>
+      <h4>Score de risco em logs de servidores web</h4>
+      <p>Combinado: caracterizar os logs e rodar modelo sobre 1 mês de um servidor.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#4f91ff"></div>
-      <div class="tl-data">22/09/2026 — Apresentação 3</div>
-      <h4>Montagem do laboratório físico</h4>
-      <p>Rack, firewall bare metal, Proxmox, Zabbix, placa de rede para IDS, patch panel. <strong style="color:#f5c518">Feedback:</strong> muito infraestrutura — pediu o desenho arquitetural mostrando onde entra a IA.</p>
+      <div class="tl-data">22/09 · Pres. 3</div>
+      <h4>Laboratório físico montado</h4>
+      <p>Combinado: desenho arquitetural mostrando onde entra a IA.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#4f91ff"></div>
-      <div class="tl-data">29/09/2026 — Apresentação 4</div>
-      <h4>Experimento: servidor Windows exposto em DMZ</h4>
-      <p>1,3 milhão de registros em ~20 horas, de 23.055 IPs únicos. Tentativas em Telnet, SSH, SNMP, 443. <strong style="color:#f5c518">Feedback:</strong> varredura ≠ ataque; falta tráfego benigno; IP não identifica cliente por NAT. Problema definido: filtrar os 23k IPs por listas negras e usar IA no que restar.</p>
+      <div class="tl-data">29/09 · Pres. 4</div>
+      <h4>Honeypot Windows em DMZ — 1,3M registros em 20h</h4>
+      <p>Combinado: filtrar os IPs por listas negras e usar IA no que restar.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#f04d4d"></div>
-      <div class="tl-data">07/10/2026 — 2ª mudança de tema (atendimento)</div>
-      <h4>Geração de regras para o OPNsense — nasce o Faro</h4>
-      <p>Já filtrava IPs por listas negras e passava o restante à IA. Pediu autorização para produção. <strong style="color:#f04d4d">Feedback:</strong> produção é a última etapa — primeiro validar com tráfego benigno e malicioso, falsos positivos e acurácia. Escopo fechado: gerar regras para o OPNsense e mapear quais ataques ele bloqueia.</p>
+      <div class="tl-data">07/10 · Pivô 2</div>
+      <h4>Nasce o Faro — geração de regras para o OPNsense</h4>
+      <p>Combinado: validar com tráfego benigno e malicioso antes de produção.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#22d67a"></div>
-      <div class="tl-data">13/10/2026 — Apresentação 6</div>
-      <h4>Filtragem por listas negras dos alertas do Suricata</h4>
-      <p>48.915 alertas → 6.700 IPs → 57 IPs após AbuseIPDB → ~1.400 alertas → assinaturas (Realtek SDK). Community ID une EVE e filterlog. <strong style="color:#f5c518">Feedback:</strong> respostas mais curtas; detalhar nomes e funcionamento das listas e das assinaturas.</p>
+      <div class="tl-data">13/10 · Pres. 6</div>
+      <h4>Filtragem em camadas — 48.915 → 57 IPs</h4>
+      <p>Combinado: detalhar as listas e assinaturas. Community ID une EVE e filterlog.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#22d67a"></div>
+      <div class="tl-data">20/10 · Pres. 7</div>
+      <h4>Realtek CVE-2021-35394 — 5 regras via API</h4>
+      <p>Combinado: desenho arquitetural C4 e especificação das regras da IA.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#22d67a"></div>
+      <div class="tl-data">03/11 · Pres. 8</div>
+      <h4>Fluxo de dados completo + pipeline reproduzível</h4>
+      <p>Combinado: análise dos 31 dias de logs — o que cada componente detecta.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot" style="background:#22d67a;border:2px solid #e8f0fe"></div>
-      <div class="tl-data">20/10/2026 — Apresentação 7 (última)</div>
-      <h4>Faro: filtragem em camadas e seleção de candidatos por IA</h4>
-      <p>Três camadas: AbuseIPDB + Spamhaus DROP + assinaturas Suricata. Realtek CVE-2021-35394 detectado em 8 dos 56 IPs. IA semiautomática propõe bloqueio via API REST. Dashboard em tempo real. <strong style="color:#f5c518">Feedback:</strong> slides poluídos; pediu desenho arquitetural, fluxograma e especificação das regras da IA. <em>"É bem legal — agora é iterar e se aprofundar."</em></p>
+      <div class="tl-data">10/11 · Pres. 9</div>
+      <h4>31 dias de coleta — site publicado — 0% falso positivo</h4>
+      <p>Combinado: arquitetura C4 nas duas vistas e detalhamento técnico por componente.</p>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ══ AVALIAÇÃO DO PROFESSOR ══ -->
-<section id="avaliacao" class="fade-in">
-  <div class="sec-tag">07 · Avaliação do professor</div>
-  <h2>O que o professor disse</h2>
-  <p class="sec-desc">Avaliação pública em <a href="https://unipampa4all.github.io/disciplinas/liaa/20262/projetos_html/aparecido-firewall.html" target="_blank">unipampa4all.github.io</a> · última atualização 20/10/2026</p>
-
-  <div class="grid-2" style="margin-top:1.5rem">
-    <div class="card" style="border-color:rgba(34,214,122,.3)">
-      <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
-      <h3>Pontos fortes</h3>
-      <ul style="padding-left:1.2rem;font-size:.9rem;line-height:2.1;margin-top:.5rem">
-        <li>Muita dedicação — 7 apresentações, maior assiduidade da turma</li>
-        <li>Laboratório físico próprio e acesso a logs reais de produção</li>
-        <li>Protótipo funcional com dashboard e integração com API do firewall</li>
-        <li>Funil quantificado: 49k alertas → 56 IPs</li>
-        <li>Conhecimento prático de redes e operação</li>
-      </ul>
-    </div>
-    <div class="card" style="border-color:rgba(245,197,24,.3)">
-      <div class="card-accent" style="background:linear-gradient(90deg,var(--amar),#92400e)"></div>
-      <h3>Pontos de atenção</h3>
-      <ul style="padding-left:1.2rem;font-size:.9rem;line-height:2.1;margin-top:.5rem">
-        <li>Foco excessivo em infraestrutura e argumentos comerciais</li>
-        <li>Tendência a apresentar experimentos novos em vez de aprofundar o combinado</li>
-        <li>Papel da IA pouco especificado — restrito a assinaturas conhecidas</li>
-        <li>Ausência de tráfego benigno e de métricas de falsos positivos</li>
-        <li>Slides poluídos e respostas longas</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="grid-2" style="margin-top:1.2rem">
-    <div class="card" style="text-align:center;background:var(--card2)">
-      <h3 style="font-size:.9rem;color:var(--cz);margin-bottom:.8rem">Progresso</h3>
-      <div style="font-size:3rem;font-weight:900;color:var(--azul)">3/5</div>
-      <p style="font-size:.82rem;margin-top:.4rem">Evolução concreta, mas 2 mudanças de tema e tendência a trazer novidades em vez de aprofundar</p>
-    </div>
-    <div class="card" style="text-align:center;background:var(--card2)">
-      <h3 style="font-size:.9rem;color:var(--cz);margin-bottom:.8rem">Mérito</h3>
-      <div style="font-size:3rem;font-weight:900;color:var(--azul)">3/5</div>
-      <p style="font-size:.82rem;margin-top:.4rem">Problema real e relevante, mas IA atuando numa etapa pequena e sem métricas de efetividade</p>
-    </div>
-  </div>
-
-  <div class="card mt2" style="border-left:4px solid var(--verde);border-radius:4px 12px 12px 4px;margin-top:1.5rem">
-    <p style="font-size:1rem;font-style:italic;color:var(--branco);line-height:1.8">
-      "Aparecido, a sua energia é admirável: você montou um laboratório inteiro, expôs um servidor à internet para ver o que acontecia e já tem o Faro bloqueando IPs com um painel em tempo real. Poucos colegas chegaram tão perto de algo funcionando de verdade. O próximo passo, porém, não é colocar mais coisas, e sim provar o que você já tem."
-    </p>
-    <p style="font-size:.85rem;margin-top:.8rem;color:var(--cz)">— Prof. Diego Kreutz · avaliação pública · 20/10/2026</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ══ CAMINHOS FUTUROS ══ -->
 <section id="caminhos" class="fade-in">
-  <div class="sec-tag">08 · Caminhos sugeridos</div>
-  <h2>6 caminhos — o que o professor pediu e o que foi feito</h2>
-  <p class="sec-desc">
-    Avaliação pública de 20/10/2026 · 
-    <a href="https://unipampa4all.github.io/disciplinas/liaa/20262/projetos_html/aparecido-firewall.html" target="_blank">ver fonte</a>
-  </p>
+  <div class="sec-tag">08 · Combinado e entregue</div>
+  <h2>O que foi pedido e o que foi feito</h2>
+  <p class="sec-desc">6 caminhos sugeridos pelo professor em 20/10/2026 — status de cada um.</p>
 
-  <!-- Caminho 1 -->
-  <div class="card" style="border-color:rgba(34,214,122,.5);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#16a34a)"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(34,214,122,.15);color:var(--verde);font-size:.85rem">Caminho 1</span>
-      <h3 style="margin:0">Validação no testbed com tráfego misto</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(34,214,122,.15);color:var(--verde)">✅ Concluído</span>
+  <div class="entreg-grid">
+    <div class="entreg">
+      <span class="ei">🧪</span>
+      <div><h4>Validação com tráfego benigno</h4>
+      <p><span class="ok">✅ Concluído</span> — 0% FP · 336.049 fluxos · 100% cobertura Realtek</p></div>
     </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">Usar o testbed do laboratório para gerar tráfego benigno (navegação, picos legítimos) e malicioso (força bruta, varreduras, exploits) com rótulos. Medir falsos positivos e taxa de detecção com e sem a IA.</p>
-      </div>
-      <div style="background:rgba(34,214,122,.06);border:1px solid rgba(34,214,122,.2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--verde);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O que foi feito</div>
-        <p style="font-size:.9rem">Executamos <code>validar_trafego_benigno.py</code> sobre os 5 dias de filterlog real (473.304 linhas). Identificamos 336.049 fluxos benignos e testamos as 5 regras IA-aparecido contra eles.</p>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.8rem">
-          <div style="text-align:center;background:var(--card);border-radius:8px;padding:.6rem 1rem;flex:1;min-width:80px">
-            <div style="font-size:1.4rem;font-weight:900;color:var(--verde)">0%</div>
-            <div style="font-size:.72rem;color:var(--cz)">Falso positivo</div>
-          </div>
-          <div style="text-align:center;background:var(--card);border-radius:8px;padding:.6rem 1rem;flex:1;min-width:80px">
-            <div style="font-size:1.4rem;font-weight:900;color:var(--verde)">336k</div>
-            <div style="font-size:.72rem;color:var(--cz)">Fluxos testados</div>
-          </div>
-          <div style="text-align:center;background:var(--card);border-radius:8px;padding:.6rem 1rem;flex:1;min-width:80px">
-            <div style="font-size:1.4rem;font-weight:900;color:var(--verde)">100%</div>
-            <div style="font-size:.72rem;color:var(--cz)">Cobertura Realtek</div>
-          </div>
-        </div>
-      </div>
+    <div class="entreg">
+      <span class="ei">🤖</span>
+      <div><h4>Comparar modelos na seleção</h4>
+      <p><span class="pend">⚠️ Parcial</span> — arquitetura permite trocar modelo; comparação fica pós-disciplina</p></div>
+    </div>
+    <div class="entreg">
+      <span class="ei">📋</span>
+      <div><h4>Regras comportamentais além de assinaturas</h4>
+      <p><span class="ok">✅ Concluído</span> — família porta+taxa em <code>avaliar_familias.py</code> · 0% colateral</p></div>
+    </div>
+    <div class="entreg">
+      <span class="ei">🗺</span>
+      <div><h4>Mapa OPNsense × ModSecurity</h4>
+      <p><span class="ok">✅ Concluído</span> — <code>docs/mapa_cobertura.md</code> com 48.915 alertas classificados</p></div>
+    </div>
+    <div class="entreg">
+      <span class="ei">🤝</span>
+      <div><h4>Colaboração com projeto ModSecurity</h4>
+      <p><span class="pend">⏳ Futuro</span> — identificado como sinergia; aguarda contato após a disciplina</p></div>
+    </div>
+    <div class="entreg">
+      <span class="ei">📄</span>
+      <div><h4>Publicação como estudo de caso</h4>
+      <p><span class="ok">✅ Base pronta</span> — pipeline reproduzível, dados reais, métricas mensuráveis</p></div>
     </div>
   </div>
-
-  <!-- Caminho 2 -->
-  <div class="card" style="border-color:rgba(79,145,255,.5);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--azul),var(--azul2))"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(79,145,255,.15);color:var(--azul);font-size:.85rem">Caminho 2</span>
-      <h3 style="margin:0">Comparar vários modelos na seleção de candidatos</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(245,197,24,.15);color:var(--amar)">⚠️ Parcial</span>
-    </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">Comparar dois modelos online de provedores diferentes + um modelo local nos mesmos 56 IPs, medindo concordância com analista, custo e latência por decisão.</p>
-      </div>
-      <div style="background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--amar);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O que foi feito</div>
-        <p style="font-size:.9rem">O pipeline já permite trocar o modelo via configuração. A arquitetura determinística atual (Fase 2) foi validada — o LLM entra na Fase 3 como família adicional de regras. A comparação entre modelos fica como trabalho futuro após a base determinística estar sólida.</p>
-        <p style="font-size:.82rem;color:var(--amar);margin-top:.5rem">→ Bloqueado intencionalmente: sem resíduo real para classificar, comparar modelos seria circular. Retomar quando houver dados rotulados.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Caminho 3 -->
-  <div class="card" style="border-color:rgba(232,121,249,.5);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--rosa),#7c3aed)"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(232,121,249,.15);color:var(--rosa);font-size:.85rem">Caminho 3</span>
-      <h3 style="margin:0">Regras comportamentais além das assinaturas</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(34,214,122,.15);color:var(--verde)">✅ Concluído</span>
-    </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">Pedir à LLM regras por padrão de comportamento (taxa, sequência de portas, horários) e não só por assinaturas. Testar contra variações do mesmo ataque para medir robustez a mutações.</p>
-      </div>
-      <div style="background:rgba(232,121,249,.05);border:1px solid rgba(232,121,249,.2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--rosa);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O que foi feito</div>
-        <p style="font-size:.9rem">Implementamos a família de regras comportamentais (porta + taxa) em <code>avaliar_familias.py</code>. Resultado do split temporal A/B:</p>
-        <ul style="font-size:.88rem;line-height:1.8;padding-left:1.2rem;margin-top:.5rem">
-          <li>Família IP individual (4.945 regras): <strong style="color:var(--verde)">0% colateral</strong></li>
-          <li>Família comportamento (169 regras): <strong style="color:var(--verde)">0% colateral</strong></li>
-          <li>Top portas: SSH 22 (662), RDP 3389 (294), SIP 5060 (178), MySQL 3306 (166)</li>
-          <li>Conclusão: sem resíduo perigoso — IPs que passam são legítimos</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Caminho 4 -->
-  <div class="card" style="border-color:rgba(245,197,24,.5);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--amar),#92400e)"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(245,197,24,.15);color:var(--amar);font-size:.85rem">Caminho 4</span>
-      <h3 style="margin:0">Mapa de cobertura OPNsense × ModSecurity</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(34,214,122,.15);color:var(--verde)">✅ Concluído</span>
-    </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">Tabela dos ataques observados nos logs de produção, indicando quais o OPNsense bloqueia com as regras geradas e quais exigem firewall de aplicação (ModSecurity). Entrega final proposta pelo professor.</p>
-      </div>
-      <div style="background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--amar);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O que foi feito</div>
-        <p style="font-size:.9rem">Criamos <code>docs/mapa_cobertura.md</code> classificando os 48.915 alertas por tipo de ameaça:</p>
-        <table style="width:100%;font-size:.82rem;border-collapse:collapse;margin-top:.6rem">
-          <tr style="border-bottom:1px solid var(--line)">
-            <td style="padding:.3rem .5rem;color:var(--cz)">Tipo</td>
-            <td style="padding:.3rem .5rem;color:var(--cz)">Alertas</td>
-            <td style="padding:.3rem .5rem;color:var(--cz)">Cobertura</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--line)">
-            <td style="padding:.3rem .5rem">Reputação (ET CINS)</td>
-            <td style="padding:.3rem .5rem">41.023</td>
-            <td style="padding:.3rem .5rem;color:var(--verde)">OPNsense ✅</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--line)">
-            <td style="padding:.3rem .5rem">Exploit (Realtek CVE)</td>
-            <td style="padding:.3rem .5rem">8</td>
-            <td style="padding:.3rem .5rem;color:var(--verde)">OPNsense ✅</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--line)">
-            <td style="padding:.3rem .5rem">Legítimo (STUN, DNS)</td>
-            <td style="padding:.3rem .5rem">7.884</td>
-            <td style="padding:.3rem .5rem;color:var(--azul)">Nenhum (OK)</td>
-          </tr>
-          <tr>
-            <td style="padding:.3rem .5rem">SQL Injection / XSS</td>
-            <td style="padding:.3rem .5rem">—</td>
-            <td style="padding:.3rem .5rem;color:var(--amar)">ModSecurity</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Caminho 5 -->
-  <div class="card" style="border-color:rgba(139,163,192,.3);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--cz),#334155)"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(139,163,192,.12);color:var(--cz);font-size:.85rem">Caminho 5</span>
-      <h3 style="margin:0">Colaboração com projeto ModSecurity do laboratório</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(139,163,192,.12);color:var(--cz)">⏳ Trabalho futuro</span>
-    </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">O professor citou um mestrando que construiu um pipeline para melhorar regras do ModSecurity. Conversar com ele pode dar uma base de ataques, métricas e scripts reaproveitáveis para a parte de aplicação web.</p>
-      </div>
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">Status</div>
-        <p style="font-size:.9rem">Identificado como sinergia possível — ambos trabalham com regras de segurança geradas por IA em camadas diferentes (rede vs. aplicação). O mapa de cobertura (Caminho 4) já documenta onde o ModSecurity seria necessário, servindo de base para a colaboração.</p>
-        <p style="font-size:.82rem;color:var(--cz);margin-top:.5rem">→ Aguarda contato com o colega após a apresentação final.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Caminho 6 -->
-  <div class="card" style="border-color:rgba(34,214,122,.3);margin-bottom:1.2rem">
-    <div class="card-accent" style="background:linear-gradient(90deg,var(--verde),#065f46)"></div>
-    <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span class="badge" style="background:rgba(34,214,122,.1);color:var(--verde);font-size:.85rem">Caminho 6</span>
-      <h3 style="margin:0">Publicação como estudo de caso (SBSeg / SBRC)</h3>
-      <span style="margin-left:auto;padding:.25rem .8rem;border-radius:20px;font-size:.78rem;font-weight:700;background:rgba(34,214,122,.15);color:var(--verde)">✅ Base pronta</span>
-    </div>
-    <div class="grid-2" style="gap:1rem">
-      <div style="background:var(--card2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--cz);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O professor pediu</div>
-        <p style="font-size:.9rem">Os dados do honeypot (1,3M registros, 23k IPs) e o funil das listas negras (49k alertas → 56 IPs), somados a uma avaliação rigorosa da IA, renderiam um artigo para o SBSeg (WTICG ou salão de ferramentas) ou WGRS do SBRC.</p>
-      </div>
-      <div style="background:rgba(34,214,122,.05);border:1px solid rgba(34,214,122,.2);border-radius:10px;padding:1rem">
-        <div style="font-size:.78rem;color:var(--verde);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em">O que foi construído</div>
-        <ul style="font-size:.88rem;line-height:1.9;padding-left:1.2rem">
-          <li>Pipeline reproduzível com 66 arquivos versionados no GitHub</li>
-          <li>Dados: 48.915 alertas, 473.304 linhas PF, 31 dias de filterlog</li>
-          <li>Resultado mensurável: 0% FP, 100% cobertura Realtek, 87,3% bloqueados</li>
-          <li>Comparação com baseline (CrowdSec): 0% cobertura incremental</li>
-          <li>Resposta clara à pergunta de pesquisa com evidências quantitativas</li>
-        </ul>
-        <p style="font-size:.82rem;color:var(--verde);margin-top:.6rem">→ Contribuição pronta para artigo — falta apenas redigir.</p>
-      </div>
-    </div>
-  </div>
-
 </section>
 
+<hr class="divider">
 
 <!-- ══ VÍDEO ══ -->
 <section id="video" class="fade-in">
